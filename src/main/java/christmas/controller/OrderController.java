@@ -3,6 +3,8 @@ package christmas.controller;
 import camp.nextstep.edu.missionutils.Console;
 import christmas.model.Order;
 import christmas.service.OrderService;
+import christmas.view.InputView;
+import christmas.view.message.InputViewMessage;
 
 public class OrderController {
 
@@ -10,10 +12,9 @@ public class OrderController {
 
     public void inputOrderMenu() {
         try {
-            System.out.println("주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)");
-            String userInput = Console.readLine();
+            String inputOrderMenu = InputView.inputOrderMenu();
             System.out.println("<주문 메뉴>");
-            Order order = this.orderService.createOrderMenu(userInput);
+            Order order = this.orderService.createOrderMenu(inputOrderMenu);
         } catch (IllegalArgumentException exception) {
             System.out.println(exception.getMessage());
             inputOrderMenu();

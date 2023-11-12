@@ -11,6 +11,7 @@ public class OrderController {
     public Order inputOrderMenu() {
         Order order = this.orderService.createOrderMenu();
         OutputView.printMenuList(order);
+        OutputView.printTotalAmountBeforeDiscount(order);
         return order;
     }
 }

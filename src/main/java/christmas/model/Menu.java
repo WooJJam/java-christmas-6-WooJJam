@@ -23,21 +23,13 @@ public enum Menu {
     private final Category category;
     private int count;
     Menu(String name, int price, Category category) {
-        this(name,price,category,0);
-    }
-    Menu(String name, int price, Category category, int count) {
         this.name = name;
         this.price = price;
         this.category = category;
-        this.count = count;
     }
 
     public String getName() {
         return name;
-    }
-
-    public void addCount(Menu menu) {
-        menu.count++;
     }
 
     public int getPrice() {

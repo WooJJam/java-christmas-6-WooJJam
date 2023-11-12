@@ -1,11 +1,11 @@
 package christmas.controller;
 
+import christmas.model.Order;
 import christmas.model.Visit;
 
 public class PromotionController {
     private final OrderController orderController;
     private final DateController dateController;
-    public static final String INPUT_DATE_REGEX = "^[0-9]*$";
 
     public PromotionController(OrderController orderController, DateController dateController) {
         this.orderController = orderController;
@@ -14,7 +14,7 @@ public class PromotionController {
 
     public void run() {
         Visit visit = setVisitDate();
-        inputOrderMenu();
+        Order order = inputOrderMenu();
     }
 
     public Visit setVisitDate() {
@@ -22,7 +22,7 @@ public class PromotionController {
 
     }
 
-    private void inputOrderMenu() {
-        orderController.inputOrderMenu();
+    private Order inputOrderMenu() {
+        return orderController.inputOrderMenu();
     }
 }

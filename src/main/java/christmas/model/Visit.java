@@ -1,8 +1,9 @@
 package christmas.model;
 
+import christmas.constant.VisitConstant;
 import christmas.validator.VisitValidate;
 
-public class Visit {
+public class Visit implements VisitConstant {
     private final int date;
     private final Week day;
 
@@ -13,10 +14,9 @@ public class Visit {
     }
 
     public Week determineDayOfWeek(String inputDate) {
-        int startDay = 6;
-        int daysFromStart = Integer.parseInt(inputDate) - 1;
+        int daysFromStart = Integer.parseInt(inputDate) - CALCULATE_ONE;
 
-        if ((startDay + daysFromStart) % 7 == 0) {
+        if ((START_DAY + daysFromStart) % DAY_OF_WEEK_COUNT == MODULA_RESULT_ZERO) {
             return Week.WEEKEND;
         }
         return Week.WEEKDAY;

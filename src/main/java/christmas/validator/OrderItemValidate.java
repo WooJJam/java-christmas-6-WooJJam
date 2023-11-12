@@ -45,19 +45,20 @@ public class OrderItemValidate implements OrderConstant{
 
     private static void validateOnlyBeverageOrdered(List<String> inputOrderItem) {
         for (String item : inputOrderItem) {
-            item = OrderItemParserUtil.extractMenuName(item);
-            hasOtherItemOrdered(item);
+            String name = OrderItemParserUtil.extractMenuName(item);
+            int quantity = OrderItemParserUtil.extractQuantity(item);
+            increaseCategoryCount(name, quantity);
         }
 
         if (Category.BEVERAGE.getCount() >0 && Category.getTotalCount() == Category.BEVERAGE.getCount()) {
-            throw new IllegalArgumentException("[ERROR] 음료만 주문할 수 없습니다!");
+            throw new OrderException(OrderExceptionMessage.ONLY_BEVERAGE_ORDERED);
         }
     }
 
-    private static void hasOtherItemOrdered(String item) {
+    private static void increaseCategoryCount(String item, int quantity) {
         for (Menu menu : Menu.values()) {
             if (menu.getName().equals(item)) {
-                menu.getCategory().addCount();
+                menu.getCategory().addCount(quantity);
             }
         }
     }
@@ -75,4 +76,5 @@ public class OrderItemValidate implements OrderConstant{
         return Arrays.stream(Menu.values())
                 .anyMatch(menu -> menu.getName().equals(menuName));
     }
+
 }

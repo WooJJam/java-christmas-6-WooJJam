@@ -25,8 +25,8 @@ public enum Category {
                 .sum();
     }
 
-public void addCount() {
-        count++;
+public void addCount(int quantity) {
+        count += quantity;
     }
 
 }

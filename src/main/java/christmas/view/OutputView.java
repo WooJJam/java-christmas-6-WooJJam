@@ -11,7 +11,8 @@ public class OutputView {
     }
     public static void printMenuList(Order order) {
         for (OrderItem orderItem : order.getOrderItems()) {
-            System.out.printf(OutputMessage.MENU_LIST.getMessage(), orderItem.getMenu(), orderItem.getQuantity()+"\n");
+            System.out.printf(OutputMessage.MENU_LIST.getMessage(), orderItem.getMenu(), orderItem.getQuantity());
+            System.out.println();
         }
     }
 }

@@ -21,4 +21,12 @@ public class Visit implements VisitConstant {
         }
         return Week.WEEKDAY;
     }
+
+    public int getDate() {
+        return date;
+    }
+
+    public Week getDay() {
+        return day;
+    }
 }

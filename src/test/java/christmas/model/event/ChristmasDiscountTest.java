@@ -1,6 +1,7 @@
 package christmas.model.event;
 
 import christmas.model.Visit;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -9,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ChristmasDiscountTest {
 
     @ParameterizedTest
+    @DisplayName("크리스마스 디데이 할인 이벤트를 적용한다.")
     @CsvSource({
             "25, 3400",
             "26, 0",

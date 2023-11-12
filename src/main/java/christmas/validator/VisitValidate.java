@@ -1,5 +1,8 @@
 package christmas.validator;
 
+import christmas.exception.VisitException;
+import christmas.exception.message.VisitExceptionMessage;
+
 import java.util.regex.Pattern;
 
 public class VisitValidate {
@@ -15,13 +18,13 @@ public class VisitValidate {
     private static void validateNumeric(String inputDate) {
         Pattern DATE_REGEX = Pattern.compile(INPUT_DATE_REGEX);
         if (!DATE_REGEX.matcher(inputDate).matches()) {
-            throw new IllegalArgumentException("[ERROR] 올바른 형식이 아닙니다.");
+            throw new VisitException(VisitExceptionMessage.NOT_INTEGER_VALUE);
         }
     }
 
     private static void validateRange(int date) {
         if (!(date >= 1 && date <= 31)) {
-            throw new IllegalArgumentException("[ERROR] 날짜는 1에서 31 사이어야 합니다. 다시 입력해주세요.");
+            throw new VisitException(VisitExceptionMessage.INVALID_DATE_RANGE);
         }
     }
 }

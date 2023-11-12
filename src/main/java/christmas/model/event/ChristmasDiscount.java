@@ -1,11 +1,10 @@
 package christmas.model.event;
 
 import christmas.model.Visit;
-import christmas.model.Week;
 
-public class DdayDiscount extends Discount {
+public class ChristmasDiscount extends Discount {
 
-    public DdayDiscount(Visit visit) {
+    public ChristmasDiscount(Visit visit) {
         this.amount = 1000;
         applyDiscount(visit);
     }

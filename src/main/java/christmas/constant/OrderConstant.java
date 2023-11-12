@@ -7,5 +7,5 @@ public interface OrderConstant {
     static final String INPUT_ORDER_SPLIT_DELIMITER_REGEX= ",";
     static final String INPUT_ORDER_SPLIT_HYPHEN_REGEX = "-";
     static final int MATCHER_GROUP_FIRST = 1;
-    static final int MATCHER_GROIP_SECOND = 2;
+    static final int MATCHER_GROUP_SECOND = 2;
 }

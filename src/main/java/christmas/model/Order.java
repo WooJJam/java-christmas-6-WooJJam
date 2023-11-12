@@ -20,12 +20,12 @@ public class Order implements OrderConstant {
         OrderItemValidate.validate(inputMenu);
         
         Pattern pattern = Pattern.compile(INPUT_ORDER_ITEM_REGEX);
-        
+
         Matcher matcher = pattern.matcher(inputMenu);
 
         while (matcher.find()) {
             String menu = matcher.group(MATCHER_GROUP_FIRST);
-            int quantity = Integer.parseInt(matcher.group(MATCHER_GROIP_SECOND));
+            int quantity = Integer.parseInt(matcher.group(MATCHER_GROUP_SECOND));
             orderItems.add(new OrderItem(menu,quantity));
         }
     }

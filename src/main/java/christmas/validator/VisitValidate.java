@@ -1,14 +1,13 @@
 package christmas.validator;
 
+import christmas.constant.VisitConstant;
 import christmas.exception.VisitException;
 import christmas.exception.message.VisitExceptionMessage;
 
 import java.util.regex.Pattern;
 
-public class VisitValidate {
-
-    public static final String INPUT_DATE_REGEX = "^[0-9]*$";
-
+public class VisitValidate implements VisitConstant {
+    
     public static void validate(String inputDate) {
         validateNumeric(inputDate);
         int date = Integer.parseInt(inputDate);
@@ -23,7 +22,7 @@ public class VisitValidate {
     }
 
     private static void validateRange(int date) {
-        if (!(date >= 1 && date <= 31)) {
+        if (!(date >= MIN_DATE_RANGE && date <= MAX_DATE_RANGE)) {
             throw new VisitException(VisitExceptionMessage.INVALID_DATE_RANGE);
         }
     }

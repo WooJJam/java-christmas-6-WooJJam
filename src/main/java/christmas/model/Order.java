@@ -18,9 +18,9 @@ public class Order implements OrderConstant {
 
     public void addOrder(String inputMenu) {
         OrderItemValidate.validate(inputMenu);
-
+        
         Pattern pattern = Pattern.compile(INPUT_ORDER_ITEM_REGEX);
-
+        
         Matcher matcher = pattern.matcher(inputMenu);
 
         while (matcher.find()) {

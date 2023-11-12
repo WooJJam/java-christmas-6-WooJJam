@@ -10,7 +10,7 @@ public class InputView {
     }
 
     public static String inputOrderMenu() {
-        System.out.println(InputViewMessage.ORDER_MENU);
+        System.out.println(InputViewMessage.ORDER_MENU.getMessage());
         return Console.readLine();
     }
 }

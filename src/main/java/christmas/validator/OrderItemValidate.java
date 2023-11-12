@@ -1,6 +1,8 @@
 package christmas.validator;
 
 import christmas.constant.OrderConstant;
+import christmas.exception.OrderException;
+import christmas.exception.message.OrderExceptionMessage;
 import christmas.model.Category;
 import christmas.model.Menu;
 import christmas.util.OrderItemParserUtil;
@@ -26,7 +28,7 @@ public class OrderItemValidate implements OrderConstant{
 
         for (String item : inputOrderItem) {
             if (!pattern.matcher(item).matches()) {
-                throw new IllegalArgumentException("[ERROR] 주문 양식이 올바르지 않습니다. (주문메뉴-수량) ");
+                throw new OrderException(OrderExceptionMessage.INVALID_ORDER_FORMAT);
             }
         }
     }
@@ -37,7 +39,7 @@ public class OrderItemValidate implements OrderConstant{
                 .filter(menuName -> !hasItemName(menuName))
                 .findAny()
                 .ifPresent(menuName -> {
-                    throw new IllegalArgumentException("[ERROR] 해당 메뉴는 존재하지 않습니다: ");
+                    throw new OrderException(OrderExceptionMessage.INVALID_ITEM_NAME);
                 });
     }
 
@@ -48,7 +50,7 @@ public class OrderItemValidate implements OrderConstant{
                 .filter(menu -> menu.getCategory() == Category.BEVERAGE)
                 .count();
         if (Category.BEVERAGE.getCount() > 0 && Category.getTotalCount() == beverageCount) {
-            throw new IllegalArgumentException("[ERROR] 음료만 주문할 수 없습니다!");
+            throw new OrderException(OrderExceptionMessage.ONLY_BEVERAGE_ORDERED);
         }
     }
 
@@ -56,9 +58,8 @@ public class OrderItemValidate implements OrderConstant{
         List<Integer> quantities = OrderItemParserUtil.extractQuantities(inputOrderItem);
         int totalItemCount = quantities.stream().mapToInt(Integer::intValue).sum();
 
-
         if (totalItemCount>20) {
-            throw new IllegalArgumentException("[ERROR] 메뉴는 한번에 20개 까지만 주문 가능합니다.");
+            throw new OrderException(OrderExceptionMessage.INVALID_MENU_COUNT);
         }
     }
 

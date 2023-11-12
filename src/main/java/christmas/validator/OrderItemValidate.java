@@ -44,13 +44,21 @@ public class OrderItemValidate implements OrderConstant{
     }
 
     private static void validateOnlyBeverageOrdered(List<String> inputOrderItem) {
-        long beverageCount = inputOrderItem.stream()
-                .map(OrderItemParserUtil::extractMenuName)
-                .map(Menu::valueOf)
-                .filter(menu -> menu.getCategory() == Category.BEVERAGE)
-                .count();
-        if (Category.BEVERAGE.getCount() > 0 && Category.getTotalCount() == beverageCount) {
-            throw new OrderException(OrderExceptionMessage.ONLY_BEVERAGE_ORDERED);
+        for (String item : inputOrderItem) {
+            item = OrderItemParserUtil.extractMenuName(item);
+            hasOtherItemOrdered(item);
+        }
+
+        if (Category.BEVERAGE.getCount() >0 && Category.getTotalCount() == Category.BEVERAGE.getCount()) {
+            throw new IllegalArgumentException("[ERROR] 음료만 주문할 수 없습니다!");
+        }
+    }
+
+    private static void hasOtherItemOrdered(String item) {
+        for (Menu menu : Menu.values()) {
+            if (menu.getName().equals(item)) {
+                menu.getCategory().addCount();
+            }
         }
     }
 

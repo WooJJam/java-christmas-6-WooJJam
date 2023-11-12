@@ -8,7 +8,6 @@ public class ChristmasDiscount extends Discount {
         this.amount = 1000;
         applyDiscount(visit);
     }
-    @Override
     public void applyDiscount(Visit visit) {
         if (visit.getDate() > 25) {
             this.amount = 0;

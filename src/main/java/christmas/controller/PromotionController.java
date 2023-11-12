@@ -17,7 +17,7 @@ public class PromotionController {
     public void run() {
         Visit visit = setVisitDate();
         Order order = inputOrderMenu();
-        applyDiscountPolicy(visit);
+        applyDiscountPolicy(visit,order);
 
     }
 
@@ -30,7 +30,7 @@ public class PromotionController {
         return orderController.inputOrderMenu();
     }
 
-    public void applyDiscountPolicy(Visit visit) {
-        this. eventController.applyDiscountPolicy(visit);
+    public void applyDiscountPolicy(Visit visit, Order order) {
+        this.eventController.applyDiscountPolicy(visit,order);
     }
 }

@@ -1,20 +1,20 @@
 package christmas.validator;
 
+import christmas.constant.OrderConstant;
 import christmas.model.Category;
 import christmas.model.Menu;
+import christmas.util.OrderItemParserUtil;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class OrderItemValidate {
+public class OrderItemValidate implements OrderConstant{
 
-    //    private String INPUT_ORDER_ITEM_REGEX = "([가-힣]+)-([0-9]+)";
-    private static Pattern pattern = Pattern.compile("([가-힣]+)-([0-9]+)");
+    private static final Pattern pattern = Pattern.compile(INPUT_ORDER_ITEM_REGEX);
 
     public static void validate(String inputOrder) {
-        inputOrder = inputOrder.replaceAll(" ", "");
-        List<String> inputOrderItem = List.of(inputOrder.split(","));
+        List<String> inputOrderItem = OrderItemParserUtil.parseOrderItems(inputOrder);
 
         validateOrderFormat(inputOrderItem);
         validateOrderItemName(inputOrderItem);
@@ -33,7 +33,7 @@ public class OrderItemValidate {
 
     private static void validateOrderItemName(List<String> inputOrderItem) {
         inputOrderItem.stream()
-                .map(item -> item.split("-")[0])
+                .map(OrderItemParserUtil::extractMenuName)
                 .filter(menuName -> !hasItemName(menuName))
                 .findAny()
                 .ifPresent(menuName -> {
@@ -43,7 +43,7 @@ public class OrderItemValidate {
 
     private static void validateOnlyBeverageOrdered(List<String> inputOrderItem) {
         long beverageCount = inputOrderItem.stream()
-                .map(item -> item.split("-")[0])
+                .map(OrderItemParserUtil::extractMenuName)
                 .map(Menu::valueOf)
                 .filter(menu -> menu.getCategory() == Category.BEVERAGE)
                 .count();
@@ -53,9 +53,9 @@ public class OrderItemValidate {
     }
 
     private static void validateMenuCount(List<String> inputOrderItem) {
-        int totalItemCount = inputOrderItem.stream()
-                .mapToInt(item -> Integer.parseInt(item.split("-")[1]))
-                .sum();
+        List<Integer> quantities = OrderItemParserUtil.extractQuantities(inputOrderItem);
+        int totalItemCount = quantities.stream().mapToInt(Integer::intValue).sum();
+
 
         if (totalItemCount>20) {
             throw new IllegalArgumentException("[ERROR] 메뉴는 한번에 20개 까지만 주문 가능합니다.");

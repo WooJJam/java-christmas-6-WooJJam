@@ -3,6 +3,7 @@ package christmas.service;
 import christmas.model.Order;
 import christmas.model.Visit;
 import christmas.model.event.ChristmasDiscount;
+import christmas.model.event.GiftDiscount;
 import christmas.model.event.SpecialDiscount;
 import christmas.model.event.WeekOfDayDiscount;
 
@@ -26,4 +27,9 @@ public class DiscountService {
         return specialDiscount.getAmount();
     }
 
+    public int applyGiftDiscountPolicy(Order order) {
+        GiftDiscount giftDiscount = new GiftDiscount(order);
+
+        return giftDiscount.getAmount();
+    }
 }

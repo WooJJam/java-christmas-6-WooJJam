@@ -2,7 +2,8 @@ package christmas.view;
 
 import christmas.model.Order;
 import christmas.model.OrderItem;
-import christmas.model.event.ChristmasDiscount;
+import christmas.model.Visit;
+import christmas.model.Week;
 import christmas.view.message.OutputMessage;
 
 public class OutputView {
@@ -24,9 +25,18 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printBenefitsHistory(ChristmasDiscount christmasDiscount) {
+    public static void printBenefitsHistory(int christmasDiscountAmount, int weekOfDayDiscountAmount, int specialDiscountAmount, int giftDiscountAmount, Visit visit) {
         System.out.println(OutputMessage.BENEFITS_HISTORY.getMessage());
-        System.out.printf(OutputMessage.CHRISTMAS_DISCOUNT_EVENT.getMessage(), christmasDiscount.getAmount());
-        System.out.println();
+        System.out.printf(OutputMessage.CHRISTMAS_DISCOUNT_EVENT.getMessage(), christmasDiscountAmount);
+        if (visit.determineDayOfWeek() == Week.WEEKDAY) {
+            System.out.printf(OutputMessage.WEEKDAY_DISCOUNT_EVENT.getMessage(), weekOfDayDiscountAmount);
+        }
+        if (visit.determineDayOfWeek() == Week.WEEKEND) {
+            System.out.printf(OutputMessage.WEEKEND_DISCOUNT_EVENT.getMessage(), weekOfDayDiscountAmount);
+        }
+        System.out.printf(OutputMessage.SPECIAL_DISCOUNT_EVENT.getMessage(), specialDiscountAmount);
+        System.out.printf(OutputMessage.GIFT_DISCOUNT_EVENT.getMessage(), giftDiscountAmount);
     }
+
+
 }

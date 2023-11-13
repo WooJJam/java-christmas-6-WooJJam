@@ -20,7 +20,9 @@ public class EventController {
         int christmasDiscountAmount = this.discountService.applyChristmasDiscountPolicy(visit);
         int weekOfDayDiscountAmount = this.discountService.applyWeekOfDayDiscountPolicy(visit, order);
         int specialDiscountAmount = this.discountService.applySpecialDiscountPolicy(visit);
+        int giftDiscountAmount = this.discountService.applyGiftDiscountPolicy(order);
 
+        OutputView.printBenefitsHistory(christmasDiscountAmount, weekOfDayDiscountAmount, specialDiscountAmount, giftDiscountAmount, visit);
 
     }
 }

@@ -39,7 +39,7 @@ public class OutputView {
     }
 
     public static void printTotalBenefitAmount(int totalDiscountAmount) {
-        System.out.println(OutputMessage.TOTAL_BENEFIT_AMOUNT);
+        System.out.println(OutputMessage.TOTAL_BENEFIT_AMOUNT.getMessage());
         System.out.printf(OutputMessage.TOTAL_DISCOUNT_AMOUNT.getMessage(), totalDiscountAmount);
     }
 }

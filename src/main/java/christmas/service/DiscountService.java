@@ -7,7 +7,7 @@ import christmas.model.event.GiftDiscount;
 import christmas.model.event.SpecialDiscount;
 import christmas.model.event.WeekOfDayDiscount;
 
-import java.util.List;
+import java.util.Map;
 
 public class DiscountService {
 
@@ -18,7 +18,7 @@ public class DiscountService {
     }
 
     public int applyWeekOfDayDiscountPolicy(Visit visit, Order order) {
-        WeekOfDayDiscount weekOfDayDiscount = new WeekOfDayDiscount(visit,order);
+        WeekOfDayDiscount weekOfDayDiscount = new WeekOfDayDiscount(visit, order);
 
         return weekOfDayDiscount.getAmount();
     }
@@ -35,18 +35,18 @@ public class DiscountService {
         return giftDiscount.getAmount();
     }
 
-    public int calculateTotalBenefitAmount(List<Integer> discount, int giftAmount) {
+    public int calculateTotalBenefitAmount(Map<String, Integer> discount, int giftAmount) {
 
         return calculateTotalDiscountAmount(discount) + giftAmount;
     }
 
-    public int calculateTotalDiscountAmount(List<Integer> discount) {
-        return discount.stream()
-                .mapToInt(Integer::intValue)
+    public int calculateTotalDiscountAmount(Map<String, Integer> discount) {
+        return discount.values().stream()
+                .mapToInt(integer -> integer)
                 .sum();
     }
 
-    public int calculateFinalAmount(int benefit, int giftAmount,  Order order) {
+    public int calculateFinalAmount(int benefit, int giftAmount, Order order) {
         return order.getAmount() - benefit + giftAmount;
     }
 }

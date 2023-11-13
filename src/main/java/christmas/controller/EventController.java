@@ -23,13 +23,17 @@ public class EventController {
         int specialDiscountAmount = this.discountService.applySpecialDiscountPolicy(visit);
         int giftAmount = this.discountService.applyGiftPolicy(order);
 
-        OutputView.printBenefitsHistory(christmasDiscountAmount, weekOfDayDiscountAmount, specialDiscountAmount, giftAmount, visit);
-        List<Integer> discount = List.of(christmasDiscountAmount, weekOfDayDiscountAmount, specialDiscountAmount);
+        Map<String, Integer> discount = new HashMap<>();
+        discount.put("christmas",christmasDiscountAmount);
+        discount.put("weekOfDay",weekOfDayDiscountAmount);
+        discount.put("special",specialDiscountAmount);
+
+        OutputView.printBenefitsHistory(discount, giftAmount, visit);
 
         return processResult(discount, giftAmount, order);
     }
 
-    private int processResult(List<Integer> discount, int giftAmount, Order order) {
+    private int processResult(Map<String,Integer> discount, int giftAmount, Order order) {
 
         int benefit = this.discountService.calculateTotalBenefitAmount(discount, giftAmount);
         OutputView.printTotalBenefitAmount(benefit);

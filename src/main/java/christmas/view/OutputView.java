@@ -3,6 +3,8 @@ package christmas.view;
 import christmas.model.*;
 import christmas.view.message.OutputMessage;
 
+import java.util.Map;
+
 public class OutputView {
 
     public static void printOrderSummary(Order order) {
@@ -19,19 +21,20 @@ public class OutputView {
         System.out.println(OutputMessage.GIFT_MENU_NAME.getMessage());
         System.out.printf(OutputMessage.GIFT_MENU.getMessage(), Menu.CHAMPAGNE.getName(), 1);
         System.out.println();
+
     }
 
-    public static void printBenefitsHistory(int christmasDiscountAmount, int weekOfDayDiscountAmount, int specialDiscountAmount, int giftDiscountAmount, Visit visit) {
+    public static void printBenefitsHistory(Map<String, Integer> discount, int giftAmount, Visit visit) {
         System.out.println(OutputMessage.BENEFITS_HISTORY.getMessage());
-        System.out.printf(OutputMessage.CHRISTMAS_DISCOUNT_EVENT.getMessage(), christmasDiscountAmount);
+        System.out.printf(OutputMessage.CHRISTMAS_DISCOUNT_EVENT.getMessage(), discount.get("christmas"));
         if (visit.determineDayOfWeek() == Week.WEEKDAY) {
-            System.out.printf(OutputMessage.WEEKDAY_DISCOUNT_EVENT.getMessage(), weekOfDayDiscountAmount);
+            System.out.printf(OutputMessage.WEEKDAY_DISCOUNT_EVENT.getMessage(), discount.get("weekOfDay"));
         }
         if (visit.determineDayOfWeek() == Week.WEEKEND) {
-            System.out.printf(OutputMessage.WEEKEND_DISCOUNT_EVENT.getMessage(), weekOfDayDiscountAmount);
+            System.out.printf(OutputMessage.WEEKEND_DISCOUNT_EVENT.getMessage(), discount.get("weekOfDay"));
         }
-        System.out.printf(OutputMessage.SPECIAL_DISCOUNT_EVENT.getMessage(), specialDiscountAmount);
-        System.out.printf(OutputMessage.GIFT_DISCOUNT_EVENT.getMessage(), giftDiscountAmount);
+        System.out.printf(OutputMessage.SPECIAL_DISCOUNT_EVENT.getMessage(), discount.get("special"));
+        System.out.printf(OutputMessage.GIFT_DISCOUNT_EVENT.getMessage(), giftAmount);
         System.out.println();
     }
 
@@ -43,13 +46,13 @@ public class OutputView {
 
     public static void printFinalAmount(int finalAmount) {
         System.out.println(OutputMessage.ESTIMATED_AMOUNT_AFTER_DISCOUNT.getMessage());
-        System.out.printf(OutputMessage.FINAL_AMOUNT.getMessage(),finalAmount);
+        System.out.printf(OutputMessage.FINAL_AMOUNT.getMessage(), finalAmount);
         System.out.println();
     }
 
     public static void printEventBadge(String badge) {
         System.out.println(OutputMessage.DECEMBER_EVENT_BADGE.getMessage());
-        System.out.printf(OutputMessage.EVENT_BADGE.getMessage(),badge);
+        System.out.printf(OutputMessage.EVENT_BADGE.getMessage(), badge);
     }
 
 }

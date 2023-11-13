@@ -5,7 +5,7 @@ import christmas.view.message.InputViewMessage;
 
 public class InputView {
     public static String readDate() {
-        System.out.println(InputViewMessage.DATE.getMessage());
+        System.out.println(InputViewMessage.VISIT_DATE.getMessage());
         return Console.readLine();
     }
 

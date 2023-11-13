@@ -2,10 +2,12 @@ package christmas.view.message;
 
 public enum OutputMessage {
 
-    ORDER_MENU("<주문 메뉴>"),
+    ORDER_MENU("\n<주문 메뉴>"),
     MENU_LIST("%s : %d개\n"),
     TOTAL_ORDER_AMOUNT_BEFORE_DISCOUNT("<할인 전 총주문 금액>"),
     FORMAT_PRICE_WITH_COMMA("%,d원\n"),
+    GIFT_MENU_NAME("<증정 메뉴>"),
+    GIFT_MENU("%s %d개\n"),
     BENEFITS_HISTORY("<혜택 내역>"),
     CHRISTMAS_DISCOUNT_EVENT("크리스마스 디데이 할인: -%,d원\n"),
     WEEKDAY_DISCOUNT_EVENT("평일 할인: -%,d원\n"),
@@ -18,7 +20,6 @@ public enum OutputMessage {
     FINAL_AMOUNT("%,d원\n"),
     DECEMBER_EVENT_BADGE("<12월 이벤트 배지>"),
     EVENT_BADGE("%s\n");
-
 
     private final String message;
     OutputMessage(String message) {

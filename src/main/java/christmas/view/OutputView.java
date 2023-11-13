@@ -1,27 +1,23 @@
 package christmas.view;
 
-import christmas.model.Order;
-import christmas.model.OrderItem;
-import christmas.model.Visit;
-import christmas.model.Week;
+import christmas.model.*;
 import christmas.view.message.OutputMessage;
 
 public class OutputView {
 
-    public static void printOrderMenu() {
+    public static void printOrderSummary(Order order) {
         System.out.println(OutputMessage.ORDER_MENU.getMessage());
-    }
-    public static void printMenuList(Order order) {
         for (OrderItem orderItem : order.getOrderItems()) {
             System.out.printf(OutputMessage.MENU_LIST.getMessage(), orderItem.getMenu(), orderItem.getQuantity());
         }
         System.out.println();
 
-    }
-
-    public static void printTotalAmountBeforeDiscount(Order order) {
         System.out.println(OutputMessage.TOTAL_ORDER_AMOUNT_BEFORE_DISCOUNT.getMessage());
         System.out.printf(OutputMessage.FORMAT_PRICE_WITH_COMMA.getMessage(), order.getAmount());
+        System.out.println();
+
+        System.out.println(OutputMessage.GIFT_MENU_NAME.getMessage());
+        System.out.printf(OutputMessage.GIFT_MENU.getMessage(), Menu.CHAMPAGNE.getName(), 1);
         System.out.println();
     }
 

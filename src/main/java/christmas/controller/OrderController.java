@@ -8,10 +8,9 @@ public class OrderController {
 
     private final OrderService orderService = new OrderService();
 
-    public Order inputOrderMenu() {
+    public Order processOrder() {
         Order order = this.orderService.createOrderMenu();
-        OutputView.printMenuList(order);
-        OutputView.printTotalAmountBeforeDiscount(order);
+        OutputView.printOrderSummary(order);
         return order;
     }
 }

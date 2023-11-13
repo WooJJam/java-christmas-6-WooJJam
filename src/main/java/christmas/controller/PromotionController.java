@@ -26,7 +26,7 @@ public class PromotionController {
     }
 
     private Order inputOrderMenu() {
-        return orderController.inputOrderMenu();
+        return orderController.processOrder();
     }
 
     private int applyEventPolicy(Visit visit, Order order) {

@@ -18,10 +18,19 @@ public class OutputView {
         System.out.printf(OutputMessage.FORMAT_PRICE_WITH_COMMA.getMessage(), order.getAmount());
         System.out.println();
 
-        System.out.println(OutputMessage.GIFT_MENU_NAME.getMessage());
-        System.out.printf(OutputMessage.GIFT_MENU.getMessage(), Menu.CHAMPAGNE.getName(), 1);
-        System.out.println();
+        printGiftMenu(order);
+    }
 
+    private static void printGiftMenu(Order order) {
+        System.out.println(OutputMessage.GIFT_MENU_NAME.getMessage());
+        if (order.getAmount() >= 120000) {
+            System.out.printf(OutputMessage.GIFT_MENU.getMessage(), Menu.CHAMPAGNE.getName(), 1);
+            System.out.println();
+        }
+
+        if (order.getAmount() < 120000) {
+            System.out.println(OutputMessage.NONE_GIFT_MENU.getMessage());
+        }
     }
 
     public static void printBenefitsHistory(Map<String, Integer> discount, int giftAmount, Visit visit) {

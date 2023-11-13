@@ -8,6 +8,7 @@ public enum OutputMessage {
     FORMAT_PRICE_WITH_COMMA("%,d원\n"),
     GIFT_MENU_NAME("<증정 메뉴>"),
     GIFT_MENU("%s %d개\n"),
+    NONE_GIFT_MENU("없음\n"),
     BENEFITS_HISTORY("<혜택 내역>"),
     CHRISTMAS_DISCOUNT_EVENT("크리스마스 디데이 할인: -%,d원\n"),
     WEEKDAY_DISCOUNT_EVENT("평일 할인: -%,d원\n"),

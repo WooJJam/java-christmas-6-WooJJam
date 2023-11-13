@@ -29,10 +29,15 @@ public class DiscountService {
         return specialDiscount.getAmount();
     }
 
-    public int applyGiftDiscountPolicy(Order order) {
+    public int applyGiftPolicy(Order order) {
         GiftDiscount giftDiscount = new GiftDiscount(order);
 
         return giftDiscount.getAmount();
+    }
+
+    public int calculateTotalBenefitAmount(List<Integer> discount, int giftAmount) {
+
+        return calculateTotalDiscountAmount(discount) + giftAmount;
     }
 
     public int calculateTotalDiscountAmount(List<Integer> discount) {
@@ -41,7 +46,7 @@ public class DiscountService {
                 .sum();
     }
 
-    public int calculateFinalAmount(int totalDiscountAmount, Order order) {
-        return order.getAmount() - totalDiscountAmount;
+    public int calculateFinalAmount(int benefit, int giftAmount,  Order order) {
+        return order.getAmount() - benefit + giftAmount;
     }
 }

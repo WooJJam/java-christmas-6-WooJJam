@@ -3,8 +3,6 @@ package christmas.controller;
 import christmas.model.Order;
 import christmas.model.Visit;
 
-import java.util.List;
-
 public class PromotionController {
     private final OrderController orderController;
     private final DateController dateController;
@@ -17,26 +15,25 @@ public class PromotionController {
     }
 
     public void run() {
-        Visit visit = setVisitDate();
+        Visit visit = reservationVisitDate();
         Order order = inputOrderMenu();
-        applyDiscountPolicy(visit,order);
-
-
+        int benefit = applyEventPolicy(visit, order);
+        applyBadge(benefit);
     }
 
-    public Visit setVisitDate() {
+    private Visit reservationVisitDate() {
         return this.dateController.inputVisitDate();
-
     }
 
     private Order inputOrderMenu() {
         return orderController.inputOrderMenu();
     }
 
-    public void applyDiscountPolicy(Visit visit, Order order) {
-        List<Integer> discount = this.eventController.setDiscountPolicy(visit,order);
+    private int applyEventPolicy(Visit visit, Order order) {
+        return this.eventController.applyEventPolicy(visit, order);
+    }
 
-        this.eventController.processTotalDiscountAmount(discount, order);
-
+    private void applyBadge(int benefit) {
+        this.eventController.processEventBadge(benefit);
     }
 }

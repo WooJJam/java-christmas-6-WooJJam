@@ -3,15 +3,27 @@ package christmas.service;
 import christmas.model.Order;
 import christmas.model.Visit;
 import christmas.model.event.ChristmasDiscount;
+import christmas.model.event.SpecialDiscount;
 import christmas.model.event.WeekOfDayDiscount;
-import christmas.view.OutputView;
 
 public class DiscountService {
 
-    public void setChristmasDiscountPolicy(Visit visit, Order order) {
+    public int applyChristmasDiscountPolicy(Visit visit) {
         ChristmasDiscount christmasDiscount = new ChristmasDiscount(visit);
-        OutputView.printBenefitsHistory(christmasDiscount);
-        WeekOfDayDiscount weekOfDayDiscount = new WeekOfDayDiscount(visit, order);
-        System.out.println("weekOfDayDiscount.getAmount() = " + weekOfDayDiscount.getAmount());
+
+        return christmasDiscount.getAmount();
     }
+
+    public int applyWeekOfDayDiscountPolicy(Visit visit, Order order) {
+        WeekOfDayDiscount weekOfDayDiscount = new WeekOfDayDiscount(visit,order);
+
+        return weekOfDayDiscount.getAmount();
+    }
+
+    public int applySpecialDiscountPolicy(Visit visit) {
+        SpecialDiscount specialDiscount = new SpecialDiscount(visit);
+
+        return specialDiscount.getAmount();
+    }
+
 }

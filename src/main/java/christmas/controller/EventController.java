@@ -42,5 +42,6 @@ public class EventController {
 
     public void processEventBadge(int benefit) {
         String badge = this.badgeService.awardBadgesBasedOnAmount(benefit);
+        OutputView.printEventBadge(badge);
     }
 }

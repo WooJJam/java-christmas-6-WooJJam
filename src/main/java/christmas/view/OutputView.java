@@ -6,9 +6,6 @@ import christmas.model.Visit;
 import christmas.model.Week;
 import christmas.view.message.OutputMessage;
 
-import java.util.List;
-import java.util.Map;
-
 public class OutputView {
 
     public static void printOrderMenu() {
@@ -52,6 +49,11 @@ public class OutputView {
         System.out.println(OutputMessage.ESTIMATED_AMOUNT_AFTER_DISCOUNT.getMessage());
         System.out.printf(OutputMessage.FINAL_AMOUNT.getMessage(),finalAmount);
         System.out.println();
+    }
+
+    public static void printEventBadge(String badge) {
+        System.out.println(OutputMessage.DECEMBER_EVENT_BADGE.getMessage());
+        System.out.printf(OutputMessage.EVENT_BADGE.getMessage(),badge);
     }
 
 }

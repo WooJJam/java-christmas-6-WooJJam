@@ -6,6 +6,9 @@ import christmas.model.Visit;
 import christmas.model.Week;
 import christmas.view.message.OutputMessage;
 
+import java.util.List;
+import java.util.Map;
+
 public class OutputView {
 
     public static void printOrderMenu() {
@@ -39,9 +42,9 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printTotalBenefitAmount(int totalDiscountAmount) {
+    public static void printTotalBenefitAmount(int totalBenefitAmount) {
         System.out.println(OutputMessage.TOTAL_BENEFIT_AMOUNT.getMessage());
-        System.out.printf(OutputMessage.TOTAL_DISCOUNT_AMOUNT.getMessage(), totalDiscountAmount);
+        System.out.printf(OutputMessage.TOTAL_DISCOUNT_AMOUNT.getMessage(), totalBenefitAmount);
         System.out.println();
     }
 

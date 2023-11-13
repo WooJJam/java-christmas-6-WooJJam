@@ -1,2 +1,6 @@
-package christmas.model.event;public class badge {
+package christmas.model.event;
+
+public enum BadgeType {
+
+    
 }

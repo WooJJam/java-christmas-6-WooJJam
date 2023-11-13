@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 public class Order implements OrderConstant {
     private final List<OrderItem> orderItems;
-    public int amount;
+    private int amount;
 
     public Order(String inputMenu) {
         this.orderItems = new ArrayList<>();

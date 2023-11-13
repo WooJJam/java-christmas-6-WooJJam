@@ -6,9 +6,7 @@ import christmas.service.BadgeService;
 import christmas.service.DiscountService;
 import christmas.view.OutputView;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class EventController {
@@ -23,22 +21,28 @@ public class EventController {
         int specialDiscountAmount = this.discountService.applySpecialDiscountPolicy(visit);
         int giftAmount = this.discountService.applyGiftPolicy(order);
 
+        Map<String, Integer> discount;
+        discount = eventAmountToMap(christmasDiscountAmount, weekOfDayDiscountAmount, specialDiscountAmount);
+
+        return processResult(discount, giftAmount, order, visit);
+    }
+
+    private Map<String, Integer> eventAmountToMap(int christmasDiscountAmount, int weekOfDayDiscountAmount, int specialDiscountAmount) {
+
         Map<String, Integer> discount = new HashMap<>();
         discount.put("christmas",christmasDiscountAmount);
         discount.put("weekOfDay",weekOfDayDiscountAmount);
         discount.put("special",specialDiscountAmount);
-
-        OutputView.printBenefitsHistory(discount, giftAmount, visit);
-
-        return processResult(discount, giftAmount, order);
+        return discount;
     }
 
-    private int processResult(Map<String,Integer> discount, int giftAmount, Order order) {
+    private int processResult(Map<String,Integer> discount, int giftAmount, Order order, Visit visit) {
 
         int benefit = this.discountService.calculateTotalBenefitAmount(discount, giftAmount);
-        OutputView.printTotalBenefitAmount(benefit);
-
         int finalAmount = this.discountService.calculateFinalAmount(benefit, giftAmount, order);
+
+        OutputView.printBenefitsHistory(discount, giftAmount, visit);
+        OutputView.printTotalBenefitAmount(benefit);
         OutputView.printFinalAmount(finalAmount);
 
         return benefit;

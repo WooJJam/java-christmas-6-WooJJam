@@ -8,23 +8,20 @@ import java.util.List;
 public class WeekOfDayDiscount extends Discount{
 
     public WeekOfDayDiscount(Visit visit, Order order) {
-        this.amount = 0;
-        applyDiscount(visit, order);
+        this.amount = applyDiscount(visit, order);
     }
 
-    public void applyDiscount(Visit visit, Order order) {
+    public int applyDiscount(Visit visit, Order order) {
         if (visit.getDay().equals(Week.WEEKDAY)) {
-            discountPolicy(order, Category.DESSERT);
+            return discountPolicy(order, Category.DESSERT);
         }
-        if (visit.getDay().equals(Week.WEEKEND)) {
-            discountPolicy(order, Category.MAIN_COURSE);
-        }
+        return discountPolicy(order, Category.MAIN_COURSE);
     }
 
-    private void discountPolicy(Order order, Category category) {
+    private int discountPolicy(Order order, Category category) {
         List<OrderItem> orderItem = order.getOrderItems();
 
-        this.amount = orderItem.stream()
+        return orderItem.stream()
                 .mapToInt(item -> {
                     String itemName = item.getMenu();
                     return Arrays.stream(Menu.values())

@@ -14,18 +14,21 @@ public class WeekOfDayDiscount extends Discount{
 
     public void applyDiscount(Visit visit, Order order) {
         if (visit.getDay().equals(Week.WEEKDAY)) {
-            weekdayDiscountPolicy(order);
+            discountPolicy(order, Category.DESSERT);
+        }
+        if (visit.getDay().equals(Week.WEEKEND)) {
+            discountPolicy(order, Category.MAIN_COURSE);
         }
     }
 
-    private void weekdayDiscountPolicy(Order order) {
+    private void discountPolicy(Order order, Category category) {
         List<OrderItem> orderItem = order.getOrderItems();
 
         this.amount = orderItem.stream()
                 .mapToInt(item -> {
                     String itemName = item.getMenu();
                     return Arrays.stream(Menu.values())
-                            .filter(menu -> itemName.equals(menu.getName()) && menu.getCategory().equals(Category.DESSERT))
+                            .filter(menu -> itemName.equals(menu.getName()) && menu.getCategory().equals(category))
                             .mapToInt(menu -> 2023 * item.getQuantity())
                             .sum();
                 })

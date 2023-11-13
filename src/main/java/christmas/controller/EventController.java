@@ -11,7 +11,7 @@ public class EventController {
 
     private final DiscountService discountService = new DiscountService();
 
-    public void applyDiscountPolicy(Visit visit, Order order) {
+    public List<Integer> setDiscountPolicy(Visit visit, Order order) {
 
        int christmasDiscountAmount = this.discountService.applyChristmasDiscountPolicy(visit);
        int weekOfDayDiscountAmount = this.discountService.applyWeekOfDayDiscountPolicy(visit,order);
@@ -20,12 +20,14 @@ public class EventController {
 
         OutputView.printBenefitsHistory (christmasDiscountAmount, weekOfDayDiscountAmount, specialDiscountAmount, giftDiscountAmount, visit);
 
-        int totalDiscountAmount = calculateTotalDiscountAmount(christmasDiscountAmount, weekOfDayDiscountAmount, specialDiscountAmount, giftDiscountAmount);
+        return List.of(christmasDiscountAmount,weekOfDayDiscountAmount,specialDiscountAmount,giftDiscountAmount);
 
-        OutputView.printTotalBenefitAmount(totalDiscountAmount);
     }
 
-    private int calculateTotalDiscountAmount(int christmasDiscountAmount, int weekOfDayDiscountAmount, int specialDiscountAmount, int giftDiscountAmount) {
-        return christmasDiscountAmount + weekOfDayDiscountAmount + specialDiscountAmount + giftDiscountAmount;
+    public void processTotalDiscountAmount(List<Integer> discount, Order order) {
+        int totalDiscountAmount = this.discountService.calculateTotalDiscountAmount(discount);
+        OutputView.printTotalBenefitAmount(totalDiscountAmount);
+        int finalAmount = this.discountService.calculateFinalAmount(totalDiscountAmount, order);
+        OutputView.printFinalAmount(finalAmount);
     }
 }

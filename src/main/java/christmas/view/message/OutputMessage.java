@@ -12,8 +12,11 @@ public enum OutputMessage {
     WEEKEND_DISCOUNT_EVENT("주말 할인: -%,d원\n"),
     SPECIAL_DISCOUNT_EVENT("특별 할인: -%,d원\n"),
     GIFT_DISCOUNT_EVENT("증정 이벤트: -%,d원\n"),
-    TOTAL_BENEFIT_AMOUNT("<총혜택 금액>\n"),
-    TOTAL_DISCOUNT_AMOUNT("%,d원\n");
+    TOTAL_BENEFIT_AMOUNT("<총혜택 금액>"),
+    TOTAL_DISCOUNT_AMOUNT("%,d원\n"),
+    ESTIMATED_AMOUNT_AFTER_DISCOUNT("<할인 후 예상 결제 금액>"),
+    FINAL_AMOUNT("%,d원\n");
+
 
     private final String message;
     OutputMessage(String message) {

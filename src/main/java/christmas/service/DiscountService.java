@@ -7,6 +7,8 @@ import christmas.model.event.GiftDiscount;
 import christmas.model.event.SpecialDiscount;
 import christmas.model.event.WeekOfDayDiscount;
 
+import java.util.List;
+
 public class DiscountService {
 
     public int applyChristmasDiscountPolicy(Visit visit) {
@@ -31,5 +33,15 @@ public class DiscountService {
         GiftDiscount giftDiscount = new GiftDiscount(order);
 
         return giftDiscount.getAmount();
+    }
+
+    public int calculateTotalDiscountAmount(List<Integer> discount) {
+        return discount.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
+
+    public int calculateFinalAmount(int totalDiscountAmount, Order order) {
+        return order.getAmount() - totalDiscountAmount;
     }
 }

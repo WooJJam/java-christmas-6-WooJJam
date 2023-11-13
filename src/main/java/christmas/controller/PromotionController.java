@@ -3,6 +3,8 @@ package christmas.controller;
 import christmas.model.Order;
 import christmas.model.Visit;
 
+import java.util.List;
+
 public class PromotionController {
     private final OrderController orderController;
     private final DateController dateController;
@@ -19,6 +21,7 @@ public class PromotionController {
         Order order = inputOrderMenu();
         applyDiscountPolicy(visit,order);
 
+
     }
 
     public Visit setVisitDate() {
@@ -31,6 +34,9 @@ public class PromotionController {
     }
 
     public void applyDiscountPolicy(Visit visit, Order order) {
-        this.eventController.applyDiscountPolicy(visit,order);
+        List<Integer> discount = this.eventController.setDiscountPolicy(visit,order);
+
+        this.eventController.processTotalDiscountAmount(discount, order);
+
     }
 }

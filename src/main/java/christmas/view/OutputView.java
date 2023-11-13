@@ -36,10 +36,19 @@ public class OutputView {
         }
         System.out.printf(OutputMessage.SPECIAL_DISCOUNT_EVENT.getMessage(), specialDiscountAmount);
         System.out.printf(OutputMessage.GIFT_DISCOUNT_EVENT.getMessage(), giftDiscountAmount);
+        System.out.println();
     }
 
     public static void printTotalBenefitAmount(int totalDiscountAmount) {
         System.out.println(OutputMessage.TOTAL_BENEFIT_AMOUNT.getMessage());
         System.out.printf(OutputMessage.TOTAL_DISCOUNT_AMOUNT.getMessage(), totalDiscountAmount);
+        System.out.println();
     }
+
+    public static void printFinalAmount(int finalAmount) {
+        System.out.println(OutputMessage.ESTIMATED_AMOUNT_AFTER_DISCOUNT.getMessage());
+        System.out.printf(OutputMessage.FINAL_AMOUNT.getMessage(),finalAmount);
+        System.out.println();
+    }
+
 }

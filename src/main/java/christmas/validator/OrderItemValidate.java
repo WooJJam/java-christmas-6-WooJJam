@@ -18,6 +18,7 @@ public class OrderItemValidate implements OrderConstant {
     private static final Pattern pattern = Pattern.compile(INPUT_ORDER_ITEM_REGEX);
 
     public static void validate(String inputOrder) {
+
         List<String> inputOrderItem = OrderItemParserUtil.parseOrderItems(inputOrder);
 
         validateDuplicate(inputOrderItem);
@@ -28,7 +29,9 @@ public class OrderItemValidate implements OrderConstant {
     }
 
     private static void validateDuplicate(List<String> inputOrderItem) {
+
         Set<String> uniqueMenu = new HashSet<>();
+
         for (String orderItem : inputOrderItem) {
             String menu = orderItem.split(INPUT_ORDER_SPLIT_HYPHEN_REGEX)[0];
             if (!uniqueMenu.add(menu)) {
@@ -38,6 +41,7 @@ public class OrderItemValidate implements OrderConstant {
     }
 
     private static void validateOrderFormat(List<String> inputOrderItem) {
+
         for (String item : inputOrderItem) {
             if (!pattern.matcher(item).matches()) {
                 throw new OrderException(OrderExceptionMessage.INVALID_ORDER_FORMAT);
@@ -46,6 +50,7 @@ public class OrderItemValidate implements OrderConstant {
     }
 
     private static void validateOrderItemName(List<String> inputOrderItem) {
+
         inputOrderItem.stream()
                 .map(OrderItemParserUtil::extractMenuName)
                 .filter(menuName -> !hasItemName(menuName))
@@ -56,6 +61,7 @@ public class OrderItemValidate implements OrderConstant {
     }
 
     private static void validateOnlyBeverageOrdered(List<String> inputOrderItem) {
+
         for (String item : inputOrderItem) {
             String name = OrderItemParserUtil.extractMenuName(item);
             int quantity = OrderItemParserUtil.extractQuantity(item);
@@ -68,6 +74,7 @@ public class OrderItemValidate implements OrderConstant {
     }
 
     private static void increaseCategoryCount(String item, int quantity) {
+
         for (Menu menu : Menu.values()) {
             if (menu.getName().equals(item)) {
                 menu.getCategory().addCount(quantity);
@@ -76,6 +83,7 @@ public class OrderItemValidate implements OrderConstant {
     }
 
     private static void validateMenuCount(List<String> inputOrderItem) {
+
         List<Integer> quantities = OrderItemParserUtil.extractQuantities(inputOrderItem);
         int totalItemCount = quantities.stream().mapToInt(Integer::intValue).sum();
 
@@ -85,6 +93,7 @@ public class OrderItemValidate implements OrderConstant {
     }
 
     private static boolean hasItemName(String menuName) {
+
         return Arrays.stream(Menu.values())
                 .anyMatch(menu -> menu.getName().equals(menuName));
     }

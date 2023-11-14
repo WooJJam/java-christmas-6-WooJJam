@@ -15,9 +15,12 @@ public class PromotionController {
     }
 
     public void run() {
+
         Visit visit = reservationVisitDate();
         Order order = inputOrderMenu();
+
         int benefit = applyEventPolicy(visit, order);
+
         applyBadge(benefit);
     }
 

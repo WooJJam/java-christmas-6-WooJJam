@@ -11,7 +11,7 @@ public enum Category {
     private int count;
 
     Category(int count) {
-        this.count=count;
+        this.count = count;
     }
 
 
@@ -20,12 +20,13 @@ public enum Category {
     }
 
     public static int getTotalCount() {
+
         return Arrays.stream(Category.values())
                 .mapToInt(Category::getCount)
                 .sum();
     }
 
-public void addCount(int quantity) {
+    public void addCount(int quantity) {
         count += quantity;
     }
 

@@ -14,6 +14,7 @@ public class Order implements OrderConstant {
     private int amount;
 
     public Order(String inputMenu) {
+
         this.orderItems = new ArrayList<>();
         OrderItemValidate.validate(inputMenu);
         addOrder(inputMenu);
@@ -21,6 +22,7 @@ public class Order implements OrderConstant {
     }
 
     public void addOrder(String inputMenu) {
+
         Pattern pattern = Pattern.compile(INPUT_ORDER_ITEM_REGEX);
 
         Matcher matcher = pattern.matcher(inputMenu);
@@ -33,6 +35,7 @@ public class Order implements OrderConstant {
     }
 
     public void calculateOrderAmount() {
+
         this.amount += orderItems.stream().mapToInt(item -> {
                     Menu menu = Arrays.stream(Menu.values())
                             .filter(m -> m.getName().equals(item.getMenu()))

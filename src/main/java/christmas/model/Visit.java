@@ -9,15 +9,18 @@ public class Visit implements VisitConstant, DateConstant {
     private final Week day;
 
     public Visit(String inputDate) {
+
         VisitValidate.validate(inputDate);
         this.date = Integer.parseInt(inputDate);
         this.day = determineDayOfWeek();
     }
 
     public Week determineDayOfWeek() {
+
         if(WEEKEND_DAYS.contains(date)) {
             return Week.WEEKEND;
         }
+
         return Week.WEEKDAY;
     }
 

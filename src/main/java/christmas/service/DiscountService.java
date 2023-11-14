@@ -12,27 +12,23 @@ import java.util.Map;
 public class DiscountService {
 
     public ChristmasDiscount applyChristmasDiscountPolicy(Visit visit) {
-        return new ChristmasDiscount(visit);
 
-//        return christmasDiscount.getAmount();
+        return new ChristmasDiscount(visit);
     }
 
     public WeekOfDayDiscount applyWeekOfDayDiscountPolicy(Visit visit, Order order) {
-        return new WeekOfDayDiscount(visit, order);
 
-//        return weekOfDayDiscount.getAmount();
+        return new WeekOfDayDiscount(visit, order);
     }
 
     public SpecialDiscount applySpecialDiscountPolicy(Visit visit) {
-        return new SpecialDiscount(visit);
 
-//        return specialDiscount.getAmount();
+        return new SpecialDiscount(visit);
     }
 
     public GiftDiscount applyGiftPolicy(Order order) {
-        return new GiftDiscount(order);
 
-//        return giftDiscount.getAmount();
+        return new GiftDiscount(order);
     }
 
     public int calculateTotalBenefitAmount(Map<String, Integer> discount, GiftDiscount giftDiscount) {
@@ -41,12 +37,14 @@ public class DiscountService {
     }
 
     public int calculateTotalDiscountAmount(Map<String, Integer> discount) {
+
         return discount.values().stream()
                 .mapToInt(integer -> integer)
                 .sum();
     }
 
     public int calculateFinalAmount(int benefit, GiftDiscount giftDiscount, Order order) {
+
         return order.getAmount() - benefit + giftDiscount.getAmount();
     }
 }

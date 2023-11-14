@@ -2,12 +2,11 @@ package christmas.service;
 
 import christmas.model.Order;
 import christmas.view.InputView;
-import christmas.view.OutputView;
-
 
 public class OrderService {
 
     public Order createOrderMenu() {
+
         try {
             String inputOrderMenu = InputView.inputOrderMenu();
             return new Order(inputOrderMenu);

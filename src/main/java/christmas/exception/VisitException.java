@@ -5,6 +5,6 @@ import christmas.exception.message.VisitExceptionMessage;
 
 public class VisitException extends IllegalArgumentException implements ExceptionMessage {
     public VisitException(VisitExceptionMessage visitExceptionMessage) {
-        super(PREFIX_ERROR_MESSAGE+visitExceptionMessage.getMessage());
+        super(PREFIX_ERROR_MESSAGE + visitExceptionMessage.getMessage());
     }
 }

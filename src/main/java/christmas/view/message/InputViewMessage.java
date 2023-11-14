@@ -7,7 +7,7 @@ public enum InputViewMessage {
 
     private final String message;
 
-    InputViewMessage(String message){
+    InputViewMessage(String message) {
         this.message = message;
     }
 

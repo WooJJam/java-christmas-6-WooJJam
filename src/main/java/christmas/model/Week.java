@@ -1,6 +1,7 @@
 package christmas.model;
 
 public enum Week {
+
     WEEKEND("주말"),
     WEEKDAY("평일");
 

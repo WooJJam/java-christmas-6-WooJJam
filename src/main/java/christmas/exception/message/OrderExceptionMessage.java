@@ -9,6 +9,7 @@ public enum OrderExceptionMessage {
     INVALID_MENU_COUNT("메뉴는 한번에 20개 까지만 주문 가능합니다.");
 
     private final String message;
+
     OrderExceptionMessage(String message) {
         this.message = message;
     }

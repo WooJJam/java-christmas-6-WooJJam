@@ -9,8 +9,10 @@ public class OrderController {
     private final OrderService orderService = new OrderService();
 
     public Order processOrder() {
+
         Order order = this.orderService.createOrderMenu();
         OutputView.printOrderSummary(order);
+
         return order;
     }
 }

@@ -14,7 +14,7 @@ public enum Menu {
     CHOCO_CAKE("초코케이크", 15000, Category.DESSERT),
     ICE_CREAM("아이스크림", 5000, Category.DESSERT),
 
-    ZERO_COLA("제로콜라", 3000,Category.BEVERAGE),
+    ZERO_COLA("제로콜라", 3000, Category.BEVERAGE),
     RED_WINE("레드와인", 60000, Category.BEVERAGE),
     CHAMPAGNE("샴페인", 25000, Category.BEVERAGE);
 
@@ -22,7 +22,9 @@ public enum Menu {
     private final int price;
     private final Category category;
     private int count;
+
     Menu(String name, int price, Category category) {
+
         this.name = name;
         this.price = price;
         this.category = category;

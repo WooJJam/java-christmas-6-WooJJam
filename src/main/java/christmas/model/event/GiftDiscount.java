@@ -10,11 +10,13 @@ public class GiftDiscount extends Discount {
     }
 
     private int applyDiscount(Order order) {
+
         int totalOrderAmount = order.getAmount();
 
-        if (totalOrderAmount >= 120000){
+        if (totalOrderAmount >= 120000) {
             return Menu.CHAMPAGNE.getPrice();
         }
+
         return 0;
     }
 }

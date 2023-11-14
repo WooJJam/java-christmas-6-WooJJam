@@ -14,12 +14,15 @@ public enum Badge {
     }
 
     public static String getBadge(int amount) {
+
         String result = "없음" ;
+
         for (Badge badge : Badge.values()) {
             if (amount >= badge.benefit) {
                 result = badge.label;
             }
         }
+
         return result;
     }
 }

@@ -15,7 +15,7 @@ public class SpecialDiscount extends Discount implements DateConstant, EventCons
 
         int date = visit.getDate();
 
-        if (SPECIAL_DAYS.contains(date) && order.getAmount() >= 10000) {
+        if (SPECIAL_DAYS.contains(date) && order.getAmount() >= DISCOUNT_EVENT_THRESHOLD) {
             return SPECIAL_DISCOUNT_AMOUNT;
         }
 

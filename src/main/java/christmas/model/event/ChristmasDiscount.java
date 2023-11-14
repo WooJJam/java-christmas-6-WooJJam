@@ -13,7 +13,7 @@ public class ChristmasDiscount extends Discount implements EventConstant {
 
     public int applyDiscount(Visit visit, Order order) {
 
-        if (visit.getDate() > CHRISTMAS_DISCOUNT_RANGE || order.getAmount() < 10000) {
+        if (visit.getDate() > CHRISTMAS_DISCOUNT_RANGE || order.getAmount() < DISCOUNT_EVENT_THRESHOLD) {
             return DISCOUNT_INITIAL_AMOUNT;
         }
 

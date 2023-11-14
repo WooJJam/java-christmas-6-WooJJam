@@ -24,7 +24,7 @@ public class WeekOfDayDiscount extends Discount {
 
         List<OrderItem> orderItems = order.getOrderItems();
 
-        if (order.getAmount() >= WEEK_OF_DAY_DISCOUNT_THRESHOLD) {
+        if (order.getAmount() >= DISCOUNT_EVENT_THRESHOLD) {
             return orderItems.stream()
                     .mapToInt(item -> calculateDiscount(item, category))
                     .sum();

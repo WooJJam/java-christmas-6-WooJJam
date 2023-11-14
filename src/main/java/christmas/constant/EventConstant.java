@@ -11,6 +11,7 @@ public interface EventConstant {
     static final String BADGE_RESULT = "없음";
 
     static final int DISCOUNT_INITIAL_AMOUNT = 0;
+    static final int DISCOUNT_EVENT_THRESHOLD = 10000;
 
     static final int CHRISTMAS_DISCOUNT_AMOUNT = 1000;
     static final int CHRISTMAS_DISCOUNT_RANGE = 25;
@@ -19,7 +20,6 @@ public interface EventConstant {
 
     static final int SPECIAL_DISCOUNT_AMOUNT = 1000;
 
-    static final int WEEK_OF_DAY_DISCOUNT_THRESHOLD = 10000;
     static final int WEEK_OF_DAY_DISCOUNT_INCREASE_AMOUNT = 2023;
 
     static final int GIFT_EVENT_THRESHOLD_AMOUNT = 120000;

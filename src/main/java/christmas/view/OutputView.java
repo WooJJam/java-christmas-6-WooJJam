@@ -11,9 +11,7 @@ public class OutputView {
 
     public static void printOrderSummary(Order order) {
         System.out.println(OutputMessage.ORDER_MENU.getMessage());
-        for (OrderItem orderItem : order.getOrderItems()) {
-            System.out.printf(OutputMessage.MENU_LIST.getMessage(), orderItem.getMenu(), orderItem.getQuantity());
-        }
+        printMenuList(order);
         System.out.println();
 
         System.out.println(OutputMessage.TOTAL_ORDER_AMOUNT_BEFORE_DISCOUNT.getMessage());
@@ -21,6 +19,12 @@ public class OutputView {
         System.out.println();
 
         printGiftMenu(order);
+    }
+
+    private static void printMenuList(Order order) {
+        for (OrderItem orderItem : order.getOrderItems()) {
+            System.out.printf(OutputMessage.MENU_LIST.getMessage(), orderItem.getMenu(), orderItem.getQuantity());
+        }
     }
 
     private static void printGiftMenu(Order order) {
@@ -44,26 +48,50 @@ public class OutputView {
 
     public static void printBenefitsHistory(ChristmasDiscount christmasDiscount, WeekOfDayDiscount weekOfDayDiscount, SpecialDiscount specialDiscount, GiftDiscount giftDiscount, Order order, Visit visit) {
         System.out.println(OutputMessage.BENEFITS_HISTORY.getMessage());
+        printLowOrderAmount(order);
+        printHighOrderAmount(christmasDiscount, weekOfDayDiscount, specialDiscount, giftDiscount, order, visit);
+        System.out.println();
+    }
+
+    private static void printLowOrderAmount(Order order) {
         if (order.getAmount() < 10000) {
             System.out.println(OutputMessage.NON_EXIST.getMessage());
         }
+    }
+
+    private static void printHighOrderAmount(ChristmasDiscount christmasDiscount, WeekOfDayDiscount weekOfDayDiscount, SpecialDiscount specialDiscount, GiftDiscount giftDiscount, Order order, Visit visit) {
         if (order.getAmount() >= 10000) {
-            if (christmasDiscount.getAmount() != 0) {
-                System.out.printf(OutputMessage.CHRISTMAS_DISCOUNT_EVENT.getMessage(), christmasDiscount.getAmount());
-            }
-            if (visit.determineDayOfWeek() == Week.WEEKDAY && weekOfDayDiscount.getAmount() != 0) {
-                System.out.printf(OutputMessage.WEEKDAY_DISCOUNT_EVENT.getMessage(), visit.getDay().getName(),weekOfDayDiscount.getAmount());
-            }
-            if (visit.determineDayOfWeek() == Week.WEEKEND && weekOfDayDiscount.getAmount() != 0) {
-                System.out.printf(OutputMessage.WEEKEND_DISCOUNT_EVENT.getMessage(), visit.getDay().getName(), weekOfDayDiscount.getAmount());
-            }
-            if (specialDiscount.getAmount() != 0) {
-                System.out.printf(OutputMessage.SPECIAL_DISCOUNT_EVENT.getMessage(), specialDiscount.getAmount());
-            }
-            if (giftDiscount.getAmount() != 0) {
-                System.out.printf(OutputMessage.GIFT_DISCOUNT_EVENT.getMessage(), giftDiscount.getAmount());
-            }
-            System.out.println();
+            printChristmasDiscount(christmasDiscount);
+            printWeekOfDayDiscount(weekOfDayDiscount, visit);
+            printSpecialDiscount(specialDiscount);
+            printGiftDiscount(giftDiscount);
+        }
+    }
+
+    private static void printChristmasDiscount(ChristmasDiscount christmasDiscount) {
+        if (christmasDiscount.getAmount() != 0) {
+            System.out.printf(OutputMessage.CHRISTMAS_DISCOUNT_EVENT.getMessage(), christmasDiscount.getAmount());
+        }
+    }
+
+    private static void printWeekOfDayDiscount(WeekOfDayDiscount weekOfDayDiscount, Visit visit) {
+        if (visit.determineDayOfWeek() == Week.WEEKDAY && weekOfDayDiscount.getAmount() != 0) {
+            System.out.printf(OutputMessage.WEEKDAY_DISCOUNT_EVENT.getMessage(), visit.getDay().getName(), weekOfDayDiscount.getAmount());
+        }
+        if (visit.determineDayOfWeek() == Week.WEEKEND && weekOfDayDiscount.getAmount() != 0) {
+            System.out.printf(OutputMessage.WEEKEND_DISCOUNT_EVENT.getMessage(), visit.getDay().getName(), weekOfDayDiscount.getAmount());
+        }
+    }
+
+    private static void printSpecialDiscount(SpecialDiscount specialDiscount) {
+        if (specialDiscount.getAmount() != 0) {
+            System.out.printf(OutputMessage.SPECIAL_DISCOUNT_EVENT.getMessage(), specialDiscount.getAmount());
+        }
+    }
+
+    private static void printGiftDiscount(GiftDiscount giftDiscount) {
+        if (giftDiscount.getAmount() != 0) {
+            System.out.printf(OutputMessage.GIFT_DISCOUNT_EVENT.getMessage(), giftDiscount.getAmount());
         }
     }
 

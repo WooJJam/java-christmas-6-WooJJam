@@ -54,7 +54,6 @@ public class EventController {
         int benefit = this.discountService.calculateTotalBenefitAmount(discount, giftAmount);
         int finalAmount = this.discountService.calculateFinalAmount(benefit, giftAmount, order);
 
-//        OutputView.printBenefitsHistory(discount, giftAmount, order, visit);
         OutputView.printTotalBenefitAmount(benefit);
         OutputView.printFinalAmount(finalAmount);
 

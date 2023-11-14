@@ -19,16 +19,20 @@ public class WeekOfDayDiscount extends Discount{
     }
 
     private int discountPolicy(Order order, Category category) {
-        List<OrderItem> orderItem = order.getOrderItems();
+        List<OrderItem> orderItems = order.getOrderItems();
+        if(order.getAmount() >= 10000) {
+            return orderItems.stream()
+                    .mapToInt(item -> calculateDiscount(item, category))
+                    .sum();
+        }
+        return 0;
+    }
 
-        return orderItem.stream()
-                .mapToInt(item -> {
-                    String itemName = item.getMenu();
-                    return Arrays.stream(Menu.values())
-                            .filter(menu -> itemName.equals(menu.getName()) && menu.getCategory().equals(category))
-                            .mapToInt(menu -> 2023 * item.getQuantity())
-                            .sum();
-                })
+    private int calculateDiscount(OrderItem item, Category category) {
+        String itemName = item.getMenu();
+        return Arrays.stream(Menu.values())
+                .filter(menu -> itemName.equals(menu.getName()) && menu.getCategory().equals(category))
+                .mapToInt(menu -> 2023 * item.getQuantity())
                 .sum();
     }
 }

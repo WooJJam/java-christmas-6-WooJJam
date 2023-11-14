@@ -1,12 +1,14 @@
 package christmas.model.menu;
 
+import christmas.constant.MenuConstant;
+
 import java.util.Arrays;
 
-public enum Category {
-    APPETIZER(0),
-    MAIN_COURSE(0),
-    DESSERT(0),
-    BEVERAGE(0);
+public enum Category implements MenuConstant {
+    APPETIZER(CATEGORY_COUNT),
+    MAIN_COURSE(CATEGORY_COUNT),
+    DESSERT(CATEGORY_COUNT),
+    BEVERAGE(CATEGORY_COUNT);
 
     private int count;
 

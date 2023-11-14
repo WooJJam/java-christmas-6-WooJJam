@@ -15,12 +15,12 @@ public class OrderItemParserUtil implements OrderConstant {
 
     public static String extractMenuName(String orderItem) {
 
-        return orderItem.split(INPUT_ORDER_SPLIT_HYPHEN_REGEX)[0];
+        return orderItem.split(INPUT_ORDER_SPLIT_HYPHEN_REGEX)[ZERO_INDEX];
     }
 
     public static int extractQuantity(String orderItem) {
 
-        return Integer.parseInt(orderItem.split(INPUT_ORDER_SPLIT_HYPHEN_REGEX)[1]);
+        return Integer.parseInt(orderItem.split(INPUT_ORDER_SPLIT_HYPHEN_REGEX)[FIRST_INDEX]);
     }
 
     public static List<Integer> extractQuantities(List<String> inputOrderItems) {

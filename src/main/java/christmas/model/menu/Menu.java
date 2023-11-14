@@ -1,29 +1,28 @@
 package christmas.model.menu;
 
-import christmas.model.menu.Category;
+import christmas.constant.MenuConstant;
 
-public enum Menu {
+public enum Menu implements MenuConstant {
 
-    YANGSONG_SOUP("양송이수프", 6000, Category.APPETIZER),
-    TAPAS("타파스", 5500, Category.APPETIZER),
-    CAESAR_SALAD("시저샐러드", 8000, Category.APPETIZER),
+    YANGSONG_SOUP(YANGSONG_SOUP_NAME, YANGSONG_SOUP_PRICE, Category.APPETIZER),
+    TAPAS(TAPAS_NAME, TAPAS_PRICE, Category.APPETIZER),
+    CAESAR_SALAD(CAESAR_SALAD_NAME, CAESAR_SALAD_PRICE, Category.APPETIZER),
 
-    T_BONE_STEAK("티본스테이크", 55000, Category.MAIN_COURSE),
-    BBQ_RIB("바비큐립", 54000, Category.MAIN_COURSE),
-    SEAFOOD_PASTA("해산물파스타", 35000, Category.MAIN_COURSE),
-    CHRISTMAS_PASTA("크리스마스파스타", 25000, Category.MAIN_COURSE),
+    T_BONE_STEAK(T_BONE_STEAK_NAME, T_BONE_STEAK_PRICE, Category.MAIN_COURSE),
+    BBQ_RIB(BBQ_RIB_NAME, BBQ_RIB_PRICE, Category.MAIN_COURSE),
+    SEAFOOD_PASTA(SEAFOOD_PASTA_NAME, SEAFOOD_PASTA_PRICE, Category.MAIN_COURSE),
+    CHRISTMAS_PASTA(CHRISTMAS_PASTA_NAME, CHRISTMAS_PASTA_PRICE, Category.MAIN_COURSE),
 
-    CHOCO_CAKE("초코케이크", 15000, Category.DESSERT),
-    ICE_CREAM("아이스크림", 5000, Category.DESSERT),
+    CHOCO_CAKE(CHOCO_CAKE_NAME, CHOCO_CAKE_PRICE, Category.DESSERT),
+    ICE_CREAM(ICE_CREAM_NAME, ICE_CREAM_PRICE, Category.DESSERT),
 
-    ZERO_COLA("제로콜라", 3000, Category.BEVERAGE),
-    RED_WINE("레드와인", 60000, Category.BEVERAGE),
-    CHAMPAGNE("샴페인", 25000, Category.BEVERAGE);
+    ZERO_COLA(ZERO_COLA_NAME, ZERO_COLA_PRICE, Category.BEVERAGE),
+    RED_WINE(RED_WINE_NAME, RED_WINE_PRICE, Category.BEVERAGE),
+    CHAMPAGNE(CHAMPAGNE_NAME, CHAMPAGNE_PRICE, Category.BEVERAGE);
 
     private final String name;
     private final int price;
     private final Category category;
-    private int count;
 
     Menu(String name, int price, Category category) {
 

@@ -1,9 +1,11 @@
 package christmas.model.date;
 
-public enum Week {
+import christmas.constant.DateConstant;
 
-    WEEKEND("주말"),
-    WEEKDAY("평일");
+public enum Week implements DateConstant {
+
+    WEEKEND(WEEKEND_CONSTANT),
+    WEEKDAY(WEEKDAY_CONSTANT);
 
     private final String name;
     Week(String day) {

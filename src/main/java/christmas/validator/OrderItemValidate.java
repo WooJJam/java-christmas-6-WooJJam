@@ -33,7 +33,7 @@ public class OrderItemValidate implements OrderConstant {
         Set<String> uniqueMenu = new HashSet<>();
 
         for (String orderItem : inputOrderItem) {
-            String menu = orderItem.split(INPUT_ORDER_SPLIT_HYPHEN_REGEX)[0];
+            String menu = orderItem.split(INPUT_ORDER_SPLIT_HYPHEN_REGEX)[ZERO_INDEX];
             if (!uniqueMenu.add(menu)) {
                 throw new OrderException(OrderExceptionMessage.DUPLICATE_ORDER_MENU);
             }
@@ -68,7 +68,7 @@ public class OrderItemValidate implements OrderConstant {
             increaseCategoryCount(name, quantity);
         }
 
-        if (Category.BEVERAGE.getCount() > 0 && Category.getTotalCount() == Category.BEVERAGE.getCount()) {
+        if (Category.BEVERAGE.getCount() > BEVERAGE_COUNT_ZERO && Category.getTotalCount() == Category.BEVERAGE.getCount()) {
             throw new OrderException(OrderExceptionMessage.ONLY_BEVERAGE_ORDERED);
         }
     }
@@ -87,7 +87,7 @@ public class OrderItemValidate implements OrderConstant {
         List<Integer> quantities = OrderItemParserUtil.extractQuantities(inputOrderItem);
         int totalItemCount = quantities.stream().mapToInt(Integer::intValue).sum();
 
-        if (totalItemCount > 20) {
+        if (totalItemCount > ORDER_COUNT_THRESHOLD) {
             throw new OrderException(OrderExceptionMessage.INVALID_MENU_COUNT);
         }
     }

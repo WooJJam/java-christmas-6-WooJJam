@@ -1,5 +1,6 @@
 package christmas.view;
 
+import christmas.constant.ViewConstant;
 import christmas.model.date.Visit;
 import christmas.model.date.Week;
 import christmas.model.event.ChristmasDiscount;
@@ -11,7 +12,7 @@ import christmas.model.order.Order;
 import christmas.model.order.OrderItem;
 import christmas.view.message.OutputMessage;
 
-public class OutputView {
+public class OutputView implements ViewConstant {
 
     public static void printOrderSummary(Order order) {
 
@@ -42,15 +43,15 @@ public class OutputView {
 
     private static void printGiftMenuOver(Order order) {
 
-        if (order.getAmount() >= 120000) {
-            System.out.printf(OutputMessage.GIFT_MENU.getMessage(), Menu.CHAMPAGNE.getName(), 1);
+        if (order.getAmount() >=GIFT_AMOUNT_THRESHOLD) {
+            System.out.printf(OutputMessage.GIFT_MENU.getMessage(), Menu.CHAMPAGNE.getName(), GIFT_CHAMPAGNE_COUNT);
             System.out.println();
         }
     }
 
     private static void printGiftMenuUnder(Order order) {
 
-        if (order.getAmount() < 120000) {
+        if (order.getAmount() < GIFT_AMOUNT_THRESHOLD) {
             System.out.println(OutputMessage.NON_EXIST.getMessage());
         }
     }
@@ -58,10 +59,10 @@ public class OutputView {
     public static void printBenefitsHistory(ChristmasDiscount christmasDiscount, WeekOfDayDiscount weekOfDayDiscount, SpecialDiscount specialDiscount, GiftDiscount giftDiscount, Order order, Visit visit) {
 
         System.out.println(OutputMessage.BENEFITS_HISTORY.getMessage());
-        if (order.getAmount() < 10000) {
+        if (order.getAmount() < ORDER_AMOUNT_THRESHOLD) {
             printLowOrderAmount(order);
         }
-        if (order.getAmount() >= 10000) {
+        if (order.getAmount() >= ORDER_AMOUNT_THRESHOLD) {
             printHighOrderAmount(christmasDiscount, weekOfDayDiscount, specialDiscount, giftDiscount, visit);
         }
     }
@@ -76,38 +77,38 @@ public class OutputView {
         printChristmasDiscount(christmasDiscount);
         printWeekOfDayDiscount(weekOfDayDiscount, visit);
         printSpecialDiscount(specialDiscount);
-        printGiftDiscount(giftDiscount);
+        printGiftAmount(giftDiscount);
         System.out.println();
     }
 
     private static void printChristmasDiscount(ChristmasDiscount christmasDiscount) {
 
-        if (christmasDiscount.getAmount() != 0) {
+        if (christmasDiscount.getAmount() != ZERO_AMOUNT) {
             System.out.printf(OutputMessage.CHRISTMAS_DISCOUNT_EVENT.getMessage(), christmasDiscount.getAmount());
         }
     }
 
     private static void printWeekOfDayDiscount(WeekOfDayDiscount weekOfDayDiscount, Visit visit) {
 
-        if (visit.determineDayOfWeek() == Week.WEEKDAY && weekOfDayDiscount.getAmount() != 0) {
+        if (visit.determineDayOfWeek() == Week.WEEKDAY && weekOfDayDiscount.getAmount() != ZERO_AMOUNT) {
             System.out.printf(OutputMessage.WEEK_OF_DAY_DISCOUNT_EVENT.getMessage(), visit.getDay().getName(), weekOfDayDiscount.getAmount());
         }
 
-        if (visit.determineDayOfWeek() == Week.WEEKEND && weekOfDayDiscount.getAmount() != 0) {
+        if (visit.determineDayOfWeek() == Week.WEEKEND && weekOfDayDiscount.getAmount() != ZERO_AMOUNT) {
             System.out.printf(OutputMessage.WEEK_OF_DAY_DISCOUNT_EVENT.getMessage(), visit.getDay().getName(), weekOfDayDiscount.getAmount());
         }
     }
 
     private static void printSpecialDiscount(SpecialDiscount specialDiscount) {
 
-        if (specialDiscount.getAmount() != 0) {
+        if (specialDiscount.getAmount() != ZERO_AMOUNT) {
             System.out.printf(OutputMessage.SPECIAL_DISCOUNT_EVENT.getMessage(), specialDiscount.getAmount());
         }
     }
 
-    private static void printGiftDiscount(GiftDiscount giftDiscount) {
+    private static void printGiftAmount(GiftDiscount giftDiscount) {
 
-        if (giftDiscount.getAmount() != 0) {
+        if (giftDiscount.getAmount() != ZERO_AMOUNT) {
             System.out.printf(OutputMessage.GIFT_DISCOUNT_EVENT.getMessage(), giftDiscount.getAmount());
         }
     }
@@ -116,10 +117,10 @@ public class OutputView {
 
         System.out.println(OutputMessage.TOTAL_BENEFIT_AMOUNT.getMessage());
 
-        if (totalBenefitAmount != 0) {
+        if (totalBenefitAmount != ZERO_AMOUNT) {
             System.out.printf(OutputMessage.TOTAL_DISCOUNT_AMOUNT.getMessage(), totalBenefitAmount);
         }
-        if (totalBenefitAmount == 0) {
+        if (totalBenefitAmount == ZERO_AMOUNT) {
             System.out.printf(OutputMessage.NONE_TOTAL_DISCOUNT_AMOUNT.getMessage(), totalBenefitAmount);
         }
         System.out.println();

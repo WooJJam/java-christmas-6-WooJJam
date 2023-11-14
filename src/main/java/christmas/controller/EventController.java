@@ -9,11 +9,9 @@ import christmas.model.event.WeekOfDayDiscount;
 import christmas.service.BadgeService;
 import christmas.service.DiscountService;
 import christmas.view.OutputView;
-import christmas.view.message.OutputMessage;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class EventController {
 
@@ -22,37 +20,33 @@ public class EventController {
 
     public int applyEventPolicy(Visit visit, Order order) {
 
-        ChristmasDiscount christmasDiscount = this.discountService.applyChristmasDiscountPolicy(visit);
-        int christmasDiscountAmount = christmasDiscount.getAmount();
-
-        WeekOfDayDiscount weekOfDayDiscount = this.discountService.applyWeekOfDayDiscountPolicy(visit, order);
-        int weekOfDayDiscountAmount = weekOfDayDiscount.getAmount();
-        SpecialDiscount specialDiscount = this.discountService.applySpecialDiscountPolicy(visit);
-        int specialDiscountAmount = specialDiscount.getAmount();
-        GiftDiscount giftDiscount = this.discountService.applyGiftPolicy(order);
-        int giftAmount = giftDiscount.getAmount();
-
-        OutputView.printBenefitsHistory(christmasDiscount,weekOfDayDiscount,specialDiscount,giftDiscount,order,visit);
-
         Map<String, Integer> discount;
-        discount = eventAmountToMap(christmasDiscountAmount, weekOfDayDiscountAmount, specialDiscountAmount);
 
-        return processResult(discount, giftAmount, order, visit);
+        ChristmasDiscount christmasDiscount = this.discountService.applyChristmasDiscountPolicy(visit);
+        WeekOfDayDiscount weekOfDayDiscount = this.discountService.applyWeekOfDayDiscountPolicy(visit, order);
+        SpecialDiscount specialDiscount = this.discountService.applySpecialDiscountPolicy(visit);
+        GiftDiscount giftDiscount = this.discountService.applyGiftPolicy(order);
+
+        discount = eventAmountToMap(christmasDiscount, weekOfDayDiscount, specialDiscount);
+        OutputView.printBenefitsHistory(christmasDiscount, weekOfDayDiscount, specialDiscount, giftDiscount, order, visit);
+
+        return processResult(discount, giftDiscount, order);
     }
 
-    private Map<String, Integer> eventAmountToMap(int christmasDiscountAmount, int weekOfDayDiscountAmount, int specialDiscountAmount) {
+    private Map<String, Integer> eventAmountToMap(ChristmasDiscount christmasDiscount, WeekOfDayDiscount weekOfDayDiscount, SpecialDiscount specialDiscount) {
 
         Map<String, Integer> discount = new HashMap<>();
-        discount.put("christmas",christmasDiscountAmount);
-        discount.put("weekOfDay",weekOfDayDiscountAmount);
-        discount.put("special",specialDiscountAmount);
+        discount.put("christmas", christmasDiscount.getAmount());
+        discount.put("weekOfDay", weekOfDayDiscount.getAmount());
+        discount.put("special", specialDiscount.getAmount());
+
         return discount;
     }
 
-    private int processResult(Map<String,Integer> discount, int giftAmount, Order order, Visit visit) {
+    private int processResult(Map<String, Integer> discount, GiftDiscount giftDiscount, Order order) {
 
-        int benefit = this.discountService.calculateTotalBenefitAmount(discount, giftAmount);
-        int finalAmount = this.discountService.calculateFinalAmount(benefit, giftAmount, order);
+        int benefit = this.discountService.calculateTotalBenefitAmount(discount, giftDiscount);
+        int finalAmount = this.discountService.calculateFinalAmount(benefit, giftDiscount, order);
 
         OutputView.printTotalBenefitAmount(benefit);
         OutputView.printFinalAmount(finalAmount);
@@ -61,6 +55,7 @@ public class EventController {
     }
 
     public void processEventBadge(int benefit) {
+
         String badge = this.badgeService.awardBadgesBasedOnAmount(benefit);
         OutputView.printEventBadge(badge);
     }

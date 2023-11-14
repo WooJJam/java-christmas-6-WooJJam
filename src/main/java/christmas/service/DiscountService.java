@@ -35,9 +35,9 @@ public class DiscountService {
 //        return giftDiscount.getAmount();
     }
 
-    public int calculateTotalBenefitAmount(Map<String, Integer> discount, int giftAmount) {
+    public int calculateTotalBenefitAmount(Map<String, Integer> discount, GiftDiscount giftDiscount) {
 
-        return calculateTotalDiscountAmount(discount) + giftAmount;
+        return calculateTotalDiscountAmount(discount) + giftDiscount.getAmount();
     }
 
     public int calculateTotalDiscountAmount(Map<String, Integer> discount) {
@@ -46,7 +46,7 @@ public class DiscountService {
                 .sum();
     }
 
-    public int calculateFinalAmount(int benefit, int giftAmount, Order order) {
-        return order.getAmount() - benefit + giftAmount;
+    public int calculateFinalAmount(int benefit, GiftDiscount giftDiscount, Order order) {
+        return order.getAmount() - benefit + giftDiscount.getAmount();
     }
 }

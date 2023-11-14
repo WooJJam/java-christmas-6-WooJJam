@@ -1,24 +1,23 @@
 package christmas.model.event;
 
 import christmas.constant.EventConstant;
+import christmas.model.Order;
 import christmas.model.Visit;
 
 public class ChristmasDiscount extends Discount implements EventConstant {
 
-    public ChristmasDiscount(Visit visit) {
+    public ChristmasDiscount(Visit visit, Order order) {
 
-        this.amount = CHRISTMAS_DISCOUNT_AMOUNT;
-        applyDiscount(visit);
+        this.amount = applyDiscount(visit, order);
     }
 
-    public void applyDiscount(Visit visit) {
+    public int applyDiscount(Visit visit, Order order) {
 
-        if (visit.getDate() > CHRISTMAS_DISCOUNT_RANGE) {
-            this.amount = DISCOUNT_INITIAL_AMOUNT;
-            return;
+        if (visit.getDate() > CHRISTMAS_DISCOUNT_RANGE || order.getAmount() < 10000) {
+            return DISCOUNT_INITIAL_AMOUNT;
         }
 
-        this.amount += (visit.getDate() - CHRISTMAS_DISCOUNT_CALCULATE_ONE) * CHRISTMAS_DISCOUNTS_INCREASE_AMOUNT;
+        return CHRISTMAS_DISCOUNT_AMOUNT + (visit.getDate() - CHRISTMAS_DISCOUNT_CALCULATE_ONE) * CHRISTMAS_DISCOUNTS_INCREASE_AMOUNT;
     }
 
 }

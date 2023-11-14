@@ -54,26 +54,26 @@ public class OutputView {
     public static void printBenefitsHistory(ChristmasDiscount christmasDiscount, WeekOfDayDiscount weekOfDayDiscount, SpecialDiscount specialDiscount, GiftDiscount giftDiscount, Order order, Visit visit) {
 
         System.out.println(OutputMessage.BENEFITS_HISTORY.getMessage());
-        printLowOrderAmount(order);
-        printHighOrderAmount(christmasDiscount, weekOfDayDiscount, specialDiscount, giftDiscount, order, visit);
-        System.out.println();
+        if (order.getAmount() < 10000) {
+            printLowOrderAmount(order);
+        }
+        if (order.getAmount() >= 10000) {
+            printHighOrderAmount(christmasDiscount, weekOfDayDiscount, specialDiscount, giftDiscount, visit);
+        }
     }
 
     private static void printLowOrderAmount(Order order) {
 
-        if (order.getAmount() < 10000) {
-            System.out.println(OutputMessage.NON_EXIST.getMessage());
-        }
+        System.out.println(OutputMessage.NON_EXIST.getMessage());
     }
 
-    private static void printHighOrderAmount(ChristmasDiscount christmasDiscount, WeekOfDayDiscount weekOfDayDiscount, SpecialDiscount specialDiscount, GiftDiscount giftDiscount, Order order, Visit visit) {
+    private static void printHighOrderAmount(ChristmasDiscount christmasDiscount, WeekOfDayDiscount weekOfDayDiscount, SpecialDiscount specialDiscount, GiftDiscount giftDiscount, Visit visit) {
 
-        if (order.getAmount() >= 10000) {
-            printChristmasDiscount(christmasDiscount);
-            printWeekOfDayDiscount(weekOfDayDiscount, visit);
-            printSpecialDiscount(specialDiscount);
-            printGiftDiscount(giftDiscount);
-        }
+        printChristmasDiscount(christmasDiscount);
+        printWeekOfDayDiscount(weekOfDayDiscount, visit);
+        printSpecialDiscount(specialDiscount);
+        printGiftDiscount(giftDiscount);
+        System.out.println();
     }
 
     private static void printChristmasDiscount(ChristmasDiscount christmasDiscount) {
@@ -86,11 +86,11 @@ public class OutputView {
     private static void printWeekOfDayDiscount(WeekOfDayDiscount weekOfDayDiscount, Visit visit) {
 
         if (visit.determineDayOfWeek() == Week.WEEKDAY && weekOfDayDiscount.getAmount() != 0) {
-            System.out.printf(OutputMessage.WEEKDAY_DISCOUNT_EVENT.getMessage(), visit.getDay().getName(), weekOfDayDiscount.getAmount());
+            System.out.printf(OutputMessage.WEEK_OF_DAY_DISCOUNT_EVENT.getMessage(), visit.getDay().getName(), weekOfDayDiscount.getAmount());
         }
 
         if (visit.determineDayOfWeek() == Week.WEEKEND && weekOfDayDiscount.getAmount() != 0) {
-            System.out.printf(OutputMessage.WEEKEND_DISCOUNT_EVENT.getMessage(), visit.getDay().getName(), weekOfDayDiscount.getAmount());
+            System.out.printf(OutputMessage.WEEK_OF_DAY_DISCOUNT_EVENT.getMessage(), visit.getDay().getName(), weekOfDayDiscount.getAmount());
         }
     }
 

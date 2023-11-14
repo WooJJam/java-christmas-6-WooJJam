@@ -11,9 +11,9 @@ import java.util.Map;
 
 public class DiscountService {
 
-    public ChristmasDiscount applyChristmasDiscountPolicy(Visit visit) {
+    public ChristmasDiscount applyChristmasDiscountPolicy(Visit visit, Order order) {
 
-        return new ChristmasDiscount(visit);
+        return new ChristmasDiscount(visit, order);
     }
 
     public WeekOfDayDiscount applyWeekOfDayDiscountPolicy(Visit visit, Order order) {
@@ -21,9 +21,9 @@ public class DiscountService {
         return new WeekOfDayDiscount(visit, order);
     }
 
-    public SpecialDiscount applySpecialDiscountPolicy(Visit visit) {
+    public SpecialDiscount applySpecialDiscountPolicy(Visit visit, Order order) {
 
-        return new SpecialDiscount(visit);
+        return new SpecialDiscount(visit, order);
     }
 
     public GiftDiscount applyGiftPolicy(Order order) {

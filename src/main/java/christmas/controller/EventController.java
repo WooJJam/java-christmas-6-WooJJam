@@ -22,9 +22,9 @@ public class EventController {
 
         Map<String, Integer> discount;
 
-        ChristmasDiscount christmasDiscount = this.discountService.applyChristmasDiscountPolicy(visit);
+        ChristmasDiscount christmasDiscount = this.discountService.applyChristmasDiscountPolicy(visit, order);
         WeekOfDayDiscount weekOfDayDiscount = this.discountService.applyWeekOfDayDiscountPolicy(visit, order);
-        SpecialDiscount specialDiscount = this.discountService.applySpecialDiscountPolicy(visit);
+        SpecialDiscount specialDiscount = this.discountService.applySpecialDiscountPolicy(visit, order);
         GiftDiscount giftDiscount = this.discountService.applyGiftPolicy(order);
 
         discount = eventAmountToMap(christmasDiscount, weekOfDayDiscount, specialDiscount);

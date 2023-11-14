@@ -1,8 +1,8 @@
 package christmas.model.event;
 
 import christmas.constant.EventConstant;
-import christmas.model.Menu;
-import christmas.model.Order;
+import christmas.model.menu.Menu;
+import christmas.model.order.Order;
 
 public class GiftDiscount extends Discount implements EventConstant {
 

@@ -1,12 +1,9 @@
 package christmas.model.event;
 
-import christmas.model.Order;
-import christmas.model.Visit;
+import christmas.model.order.Order;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.mockito.internal.matchers.Or;
 
 import static org.junit.jupiter.api.Assertions.*;
 

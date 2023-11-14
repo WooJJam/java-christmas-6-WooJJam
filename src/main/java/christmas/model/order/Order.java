@@ -1,6 +1,7 @@
-package christmas.model;
+package christmas.model.order;
 
 import christmas.constant.OrderConstant;
+import christmas.model.menu.Menu;
 import christmas.validator.OrderItemValidate;
 
 import java.util.ArrayList;

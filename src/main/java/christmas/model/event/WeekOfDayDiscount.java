@@ -1,6 +1,11 @@
 package christmas.model.event;
 
-import christmas.model.*;
+import christmas.model.date.Visit;
+import christmas.model.date.Week;
+import christmas.model.menu.Category;
+import christmas.model.menu.Menu;
+import christmas.model.order.Order;
+import christmas.model.order.OrderItem;
 
 import java.util.Arrays;
 import java.util.List;

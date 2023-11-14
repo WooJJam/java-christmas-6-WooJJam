@@ -1,9 +1,9 @@
 package christmas.model;
 
+import christmas.model.order.Order;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.internal.matchers.Or;
 
 class OrderTest {
 

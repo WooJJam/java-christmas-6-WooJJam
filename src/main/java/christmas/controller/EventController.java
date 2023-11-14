@@ -1,7 +1,7 @@
 package christmas.controller;
 
-import christmas.model.Order;
-import christmas.model.Visit;
+import christmas.model.order.Order;
+import christmas.model.date.Visit;
 import christmas.model.event.ChristmasDiscount;
 import christmas.model.event.GiftDiscount;
 import christmas.model.event.SpecialDiscount;

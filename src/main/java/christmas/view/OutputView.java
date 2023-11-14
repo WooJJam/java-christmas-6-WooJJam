@@ -1,10 +1,14 @@
 package christmas.view;
 
-import christmas.model.*;
+import christmas.model.date.Visit;
+import christmas.model.date.Week;
 import christmas.model.event.ChristmasDiscount;
 import christmas.model.event.GiftDiscount;
 import christmas.model.event.SpecialDiscount;
 import christmas.model.event.WeekOfDayDiscount;
+import christmas.model.menu.Menu;
+import christmas.model.order.Order;
+import christmas.model.order.OrderItem;
 import christmas.view.message.OutputMessage;
 
 public class OutputView {

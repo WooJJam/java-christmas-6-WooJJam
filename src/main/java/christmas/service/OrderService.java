@@ -1,6 +1,6 @@
 package christmas.service;
 
-import christmas.model.Order;
+import christmas.model.order.Order;
 import christmas.view.InputView;
 
 public class OrderService {

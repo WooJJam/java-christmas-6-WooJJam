@@ -2,8 +2,8 @@ package christmas.model.event;
 
 import christmas.constant.DateConstant;
 import christmas.constant.EventConstant;
-import christmas.model.Order;
-import christmas.model.Visit;
+import christmas.model.order.Order;
+import christmas.model.date.Visit;
 
 public class SpecialDiscount extends Discount implements DateConstant, EventConstant {
 

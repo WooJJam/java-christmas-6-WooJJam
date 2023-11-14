@@ -1,4 +1,6 @@
-package christmas.model;
+package christmas.model.menu;
+
+import christmas.model.menu.Category;
 
 public enum Menu {
 

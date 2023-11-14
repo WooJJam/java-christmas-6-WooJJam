@@ -3,8 +3,8 @@ package christmas.validator;
 import christmas.constant.OrderConstant;
 import christmas.exception.OrderException;
 import christmas.exception.message.OrderExceptionMessage;
-import christmas.model.Category;
-import christmas.model.Menu;
+import christmas.model.menu.Category;
+import christmas.model.menu.Menu;
 import christmas.util.OrderItemParserUtil;
 
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package christmas.model;
+package christmas.model.date;
 
 import christmas.constant.DateConstant;
 import christmas.constant.VisitConstant;

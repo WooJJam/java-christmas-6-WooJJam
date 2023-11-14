@@ -1,6 +1,6 @@
 package christmas.controller;
 
-import christmas.model.Visit;
+import christmas.model.date.Visit;
 import christmas.service.DateService;
 
 public class DateController {

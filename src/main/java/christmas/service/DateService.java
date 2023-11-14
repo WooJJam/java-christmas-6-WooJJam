@@ -1,6 +1,6 @@
 package christmas.service;
 
-import christmas.model.Visit;
+import christmas.model.date.Visit;
 import christmas.view.InputView;
 
 public class DateService {

@@ -1,6 +1,6 @@
 package christmas.controller;
 
-import christmas.model.Order;
+import christmas.model.order.Order;
 import christmas.service.OrderService;
 import christmas.view.OutputView;
 

@@ -1,8 +1,8 @@
 package christmas.exception.message;
 
 public enum VisitExceptionMessage {
-    NOT_INTEGER_VALUE("날짜는 정수만 입력 가능 합니다."),
-    INVALID_DATE_RANGE("날짜는 1에서 31 사이어야 합니다. 다시 입력해주세요.");
+    NOT_INTEGER_VALUE("유효하지 않은 날짜입니다. 다시 입력해 주세요."),
+    INVALID_DATE_RANGE("유효하지 않은 날짜입니다. 다시 입력해 주세요.");
 
     private final String message;
 

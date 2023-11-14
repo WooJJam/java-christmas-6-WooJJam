@@ -1,7 +1,9 @@
 package christmas.model.event;
 
-public abstract class Discount {
-    public int amount = 0;
+import christmas.constant.EventConstant;
+
+public abstract class Discount implements EventConstant {
+    public int amount = DISCOUNT_INITIAL_AMOUNT;
 
     public int getAmount() {
         return amount;

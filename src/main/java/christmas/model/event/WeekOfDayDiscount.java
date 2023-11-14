@@ -24,13 +24,13 @@ public class WeekOfDayDiscount extends Discount {
 
         List<OrderItem> orderItems = order.getOrderItems();
 
-        if (order.getAmount() >= 10000) {
+        if (order.getAmount() >= WEEK_OF_DAY_DISCOUNT_THRESHOLD) {
             return orderItems.stream()
                     .mapToInt(item -> calculateDiscount(item, category))
                     .sum();
         }
 
-        return 0;
+        return DISCOUNT_INITIAL_AMOUNT;
     }
 
     private int calculateDiscount(OrderItem item, Category category) {
@@ -39,7 +39,7 @@ public class WeekOfDayDiscount extends Discount {
 
         return Arrays.stream(Menu.values())
                 .filter(menu -> itemName.equals(menu.getName()) && menu.getCategory().equals(category))
-                .mapToInt(menu -> 2023 * item.getQuantity())
+                .mapToInt(menu -> WEEK_OF_DAY_DISCOUNT_INCREASE_AMOUNT * item.getQuantity())
                 .sum();
     }
 }

@@ -1,9 +1,10 @@
 package christmas.model.event;
 
 import christmas.constant.DateConstant;
+import christmas.constant.EventConstant;
 import christmas.model.Visit;
 
-public class SpecialDiscount extends Discount implements DateConstant {
+public class SpecialDiscount extends Discount implements DateConstant, EventConstant {
 
     public SpecialDiscount(Visit visit) {
         this.amount = applyDiscount(visit);
@@ -14,9 +15,9 @@ public class SpecialDiscount extends Discount implements DateConstant {
         int date = visit.getDate();
 
         if (SPECIAL_DAYS.contains(date)) {
-            return 1000;
+            return SPECIAL_DISCOUNT_AMOUNT;
         }
 
-        return 0;
+        return DISCOUNT_INITIAL_AMOUNT;
     }
 }

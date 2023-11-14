@@ -1,9 +1,10 @@
 package christmas.model.event;
 
+import christmas.constant.EventConstant;
 import christmas.model.Menu;
 import christmas.model.Order;
 
-public class GiftDiscount extends Discount {
+public class GiftDiscount extends Discount implements EventConstant {
 
     public GiftDiscount(Order order) {
         this.amount = applyDiscount(order);
@@ -13,10 +14,10 @@ public class GiftDiscount extends Discount {
 
         int totalOrderAmount = order.getAmount();
 
-        if (totalOrderAmount >= 120000) {
+        if (totalOrderAmount >= GIFT_EVENT_THRESHOLD_AMOUNT) {
             return Menu.CHAMPAGNE.getPrice();
         }
 
-        return 0;
+        return DISCOUNT_INITIAL_AMOUNT;
     }
 }

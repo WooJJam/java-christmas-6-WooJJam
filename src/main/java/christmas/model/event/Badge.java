@@ -1,9 +1,11 @@
 package christmas.model.event;
 
-public enum Badge {
-    STAR(5000, "별"),
-    TREE(10000, "트리"),
-    SANTA(20000, "산타");
+import christmas.constant.EventConstant;
+
+public enum Badge implements EventConstant {
+    STAR(STAR_BADGE_BENEFIT, START_BADGE_LABEL),
+    TREE(TREE_BADGE_BENEFIT, TREE_BADGE_LABEL),
+    SANTA(SANTA_BADGE_BENEFIT, SANTA_BADGE_LABEL);
 
     private final int benefit;
     private final String label;
@@ -15,7 +17,7 @@ public enum Badge {
 
     public static String getBadge(int amount) {
 
-        String result = "없음" ;
+        String result = BADGE_RESULT ;
 
         for (Badge badge : Badge.values()) {
             if (amount >= badge.benefit) {

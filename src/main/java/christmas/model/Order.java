@@ -15,13 +15,12 @@ public class Order implements OrderConstant {
 
     public Order(String inputMenu) {
         this.orderItems = new ArrayList<>();
+        OrderItemValidate.validate(inputMenu);
         addOrder(inputMenu);
         calculateOrderAmount();
     }
 
     public void addOrder(String inputMenu) {
-        OrderItemValidate.validate(inputMenu);
-
         Pattern pattern = Pattern.compile(INPUT_ORDER_ITEM_REGEX);
 
         Matcher matcher = pattern.matcher(inputMenu);

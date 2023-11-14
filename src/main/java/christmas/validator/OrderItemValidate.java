@@ -8,24 +8,36 @@ import christmas.model.Menu;
 import christmas.util.OrderItemParserUtil;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 
-public class OrderItemValidate implements OrderConstant{
+public class OrderItemValidate implements OrderConstant {
 
     private static final Pattern pattern = Pattern.compile(INPUT_ORDER_ITEM_REGEX);
 
     public static void validate(String inputOrder) {
         List<String> inputOrderItem = OrderItemParserUtil.parseOrderItems(inputOrder);
 
+        validateDuplicate(inputOrderItem);
         validateOrderFormat(inputOrderItem);
         validateOrderItemName(inputOrderItem);
         validateOnlyBeverageOrdered(inputOrderItem);
         validateMenuCount(inputOrderItem);
     }
 
-    private static void validateOrderFormat(List<String> inputOrderItem) {
+    private static void validateDuplicate(List<String> inputOrderItem) {
+        Set<String> uniqueMenu = new HashSet<>();
+        for (String orderItem : inputOrderItem) {
+            String menu = orderItem.split(INPUT_ORDER_SPLIT_HYPHEN_REGEX)[0];
+            if (!uniqueMenu.add(menu)) {
+                throw new OrderException(OrderExceptionMessage.DUPLICATE_ORDER_MENU);
+            }
+        }
+    }
 
+    private static void validateOrderFormat(List<String> inputOrderItem) {
         for (String item : inputOrderItem) {
             if (!pattern.matcher(item).matches()) {
                 throw new OrderException(OrderExceptionMessage.INVALID_ORDER_FORMAT);
@@ -50,7 +62,7 @@ public class OrderItemValidate implements OrderConstant{
             increaseCategoryCount(name, quantity);
         }
 
-        if (Category.BEVERAGE.getCount() >0 && Category.getTotalCount() == Category.BEVERAGE.getCount()) {
+        if (Category.BEVERAGE.getCount() > 0 && Category.getTotalCount() == Category.BEVERAGE.getCount()) {
             throw new OrderException(OrderExceptionMessage.ONLY_BEVERAGE_ORDERED);
         }
     }
@@ -67,7 +79,7 @@ public class OrderItemValidate implements OrderConstant{
         List<Integer> quantities = OrderItemParserUtil.extractQuantities(inputOrderItem);
         int totalItemCount = quantities.stream().mapToInt(Integer::intValue).sum();
 
-        if (totalItemCount>20) {
+        if (totalItemCount > 20) {
             throw new OrderException(OrderExceptionMessage.INVALID_MENU_COUNT);
         }
     }
